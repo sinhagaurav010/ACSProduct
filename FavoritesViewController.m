@@ -70,6 +70,8 @@ if(isSaveToFav == 1)
 
     if([arrayFavrites count]>0)
     self.navigationItem.rightBarButtonItem =BARBUTTON(@"Edit", @selector(edit));
+    
+    [self.navigationItem setTitle:TITLEFAV];
 
     NSLog(@"%@",arrayFavrites);
 

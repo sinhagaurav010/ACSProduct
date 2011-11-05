@@ -8,7 +8,8 @@
 #import "UserLocationFinder.h"
 
 #define TESTING 1
-
+#define TITLEFAV @"Favourites"
+#define TITLENEARBY @"NearBy"
 
 #define FIELDADD @"Address"
 #define FIELDCOST @"Cost"

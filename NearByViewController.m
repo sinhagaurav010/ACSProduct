@@ -39,14 +39,16 @@
 
 - (void)viewDidLoad
 {
+    [self.navigationItem setTitle:TITLENEARBY];
+    
     arrayNearBy = [[NSMutableArray alloc] init];
     
     for(int i=0;i<[arrayAllData  count];i++)
     {
-    if((int)[ModalController  calDistancebetWithLat:[locationUser.strUserLat doubleValue] with:[locationUser.strUserLong doubleValue] with:[[[arrayAllData objectAtIndex:i ]objectForKey:@"Lat"]doubleValue] with:[[[arrayAllData objectAtIndex:i ]objectForKey:@"Long"]doubleValue]]<RADIUS)
-    {
-        [arrayNearBy addObject:[arrayAllData objectAtIndex:i]];
-    }
+        if((int)[ModalController  calDistancebetWithLat:[locationUser.strUserLat doubleValue] with:[locationUser.strUserLong doubleValue] with:[[[arrayAllData objectAtIndex:i ]objectForKey:@"Lat"]doubleValue] with:[[[arrayAllData objectAtIndex:i ]objectForKey:@"Long"]doubleValue]]<RADIUS)
+        {
+            [arrayNearBy addObject:[arrayAllData objectAtIndex:i]];
+        }
     }
     NSLog(@"%@",arrayNearBy);
     
@@ -62,12 +64,12 @@
         
         tableNearBy.delegate = self;
         tableNearBy.dataSource = self;
-
+        
     }
     [self.navigationController.navigationBar setTintColor:[UIColor blackColor] ];
     
     
-
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 }

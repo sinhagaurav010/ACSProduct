@@ -100,6 +100,7 @@
 }
 -(IBAction)touchForMap:(id)sender
 {
+    
     MapViewController *mapController = [[MapViewController alloc] init];
     mapController.isFromDetail = 1;
     mapController.arrayMapLocs = [[NSMutableArray alloc] init];
