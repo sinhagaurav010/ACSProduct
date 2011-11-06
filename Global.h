@@ -31,6 +31,10 @@
 #define TYPECAT @"Cat"
 #define TYPEFEAT @"Feat"
 
+
+#define  AppIDAPI @"169613193103512"
+#define  AppSecret @"1e9a80bb2863ebba2b38de5a9751ffb0"
+
 #define SAVEFAV @"FavACS"
 
 BOOL isSaveToFav; 

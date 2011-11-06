@@ -12,9 +12,12 @@
 
 
 @synthesize window=_window;
+@synthesize facebook;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    lginController = [[DetailsViewController alloc] init];
+
     locationUser = [[UserLocationFinder alloc] init ];
     [locationUser findCurrentLocation];
     
@@ -26,6 +29,12 @@
     [self.window makeKeyAndVisible];
     return YES;
 }
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    NSLog(@"ye");
+	return [lginController.facebook handleOpenURL:url];
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

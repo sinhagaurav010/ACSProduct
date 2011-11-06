@@ -33,9 +33,9 @@
  */
 - (UIImage*)buttonImage {
   if (_isLoggedIn) {
-    return [UIImage imageNamed:@"FBConnect.bundle/images/LogoutNormal.png"];
+    return [UIImage imageNamed:@"LogoutNormal.png"];
   } else {
-    return [UIImage imageNamed:@"FBConnect.bundle/images/LoginNormal.png"];
+    return [UIImage imageNamed:@"LoginNormal.png"];
   }
 }
 
@@ -44,9 +44,9 @@
  */
 - (UIImage*)buttonHighlightedImage {
   if (_isLoggedIn) {
-    return [UIImage imageNamed:@"FBConnect.bundle/images/LogoutPressed.png"];
+    return [UIImage imageNamed:@"LogoutNormal.png"];
   } else {
-    return [UIImage imageNamed:@"FBConnect.bundle/images/LoginPressed.png"];
+    return [UIImage imageNamed:@"LoginNormal.png"];
   }
 }
 

@@ -14,10 +14,15 @@
 #import "SlideShowViewController.h"
 #import "MapViewController.h"
 #import <MessageUI/MessageUI.h>
+#import "Facebook.h"
+#import "FBLoginButton.h"
+#import "MBProgressHUD.h"
+#import "JSON.h"
 
-
-@interface DetailsViewController : UIViewController<MFMailComposeViewControllerDelegate>
+@interface DetailsViewController : UIViewController<MFMailComposeViewControllerDelegate,FBSessionDelegate, FBRequestDelegate,FBDialogDelegate>
 {
+    IBOutlet FBLoginButton* _fbButton;
+
     IBOutlet UIView *viewForWebView;
     IBOutlet UIWebView *webViewInfo;
     NSMutableArray *arrayTableInfo;
@@ -27,9 +32,11 @@
     IBOutlet UIButton *buttonEail;
     IBOutlet UIButton *buttonFaceBook;
     IBOutlet UIButton *buttonTwitter;
-    
+    NSArray* _permissions;
+
 }
 
+@property (retain, nonatomic) Facebook * facebook;
 
 -(void)clickOn:(NSString *)stringEmailId;
 

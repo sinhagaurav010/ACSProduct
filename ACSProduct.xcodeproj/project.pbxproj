@@ -78,6 +78,8 @@
 		5D436704144B4F34005A86C5 /* DealsInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D436702144B4F34005A86C5 /* DealsInfoViewController.m */; };
 		5D436705144B4F34005A86C5 /* DealsInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D436703144B4F34005A86C5 /* DealsInfoViewController.xib */; };
 		5D4A6083145216EC00718B57 /* UserLocationFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D4A6082145216EC00718B57 /* UserLocationFinder.m */; };
+		5D912C1E14673A43000BFEA4 /* LogoutNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D912C1D14673A43000BFEA4 /* LogoutNormal.png */; };
+		5D912C2114673AE6000BFEA4 /* LoginNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D912C2014673AE6000BFEA4 /* LoginNormal.png */; };
 		5DAA5EEE144B824C0019093E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DAA5EED144B824C0019093E /* CoreLocation.framework */; };
 		5DAA5EF1144B865D0019093E /* comman.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DAA5EF0144B865D0019093E /* comman.png */; };
 		5DAA5EF9144B90B00019093E /* SlideShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DAA5EF7144B90AF0019093E /* SlideShowViewController.m */; };
@@ -253,6 +255,8 @@
 		5D436703144B4F34005A86C5 /* DealsInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DealsInfoViewController.xib; sourceTree = "<group>"; };
 		5D4A6081145216EC00718B57 /* UserLocationFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLocationFinder.h; sourceTree = "<group>"; };
 		5D4A6082145216EC00718B57 /* UserLocationFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLocationFinder.m; sourceTree = "<group>"; };
+		5D912C1D14673A43000BFEA4 /* LogoutNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoutNormal.png; sourceTree = "<group>"; };
+		5D912C2014673AE6000BFEA4 /* LoginNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginNormal.png; sourceTree = "<group>"; };
 		5DAA5EED144B824C0019093E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		5DAA5EF0144B865D0019093E /* comman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comman.png; sourceTree = "<group>"; };
 		5DAA5EF6144B90AF0019093E /* SlideShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideShowViewController.h; sourceTree = "<group>"; };
@@ -366,9 +370,9 @@
 			children = (
 				1CC55AC614652DF100F1012B /* facebook_ios_sdk_Prefix.pch */,
 				1CC55AC714652DF100F1012B /* Facebook.h */,
+				1CC55ACA14652DF100F1012B /* FBDialog.bundle */,
 				1CC55AC814652DF100F1012B /* Facebook.m */,
 				1CC55AC914652DF100F1012B /* FBConnect.h */,
-				1CC55ACA14652DF100F1012B /* FBDialog.bundle */,
 				1CC55ACB14652DF100F1012B /* FBDialog.h */,
 				1CC55ACC14652DF100F1012B /* FBDialog.m */,
 				1CC55ACD14652DF100F1012B /* FBLoginDialog.h */,
@@ -421,6 +425,7 @@
 		5D208126143E287F00D6B481 = {
 			isa = PBXGroup;
 			children = (
+				5D912C1F14673A58000BFEA4 /* FaceBook */,
 				1CC55AEF14652EA800F1012B /* FBLoginButton */,
 				1CC55AEA14652DFA00F1012B /* FBConnect */,
 				1CC55AEB14652E0600F1012B /* JSON */,
@@ -652,6 +657,15 @@
 				5D4A6082145216EC00718B57 /* UserLocationFinder.m */,
 			);
 			name = UserLocationFinder;
+			sourceTree = "<group>";
+		};
+		5D912C1F14673A58000BFEA4 /* FaceBook */ = {
+			isa = PBXGroup;
+			children = (
+				5D912C2014673AE6000BFEA4 /* LoginNormal.png */,
+				5D912C1D14673A43000BFEA4 /* LogoutNormal.png */,
+			);
+			name = FaceBook;
 			sourceTree = "<group>";
 		};
 		5DAA5EFB144B90BB0019093E /* SlidesShow */ = {
@@ -906,6 +920,8 @@
 				5DB371DC145C77C800C97091 /* emailButton.png in Resources */,
 				5DB371DD145C77C800C97091 /* twittericon.png in Resources */,
 				1CC55ADF14652DF100F1012B /* FBDialog.bundle in Resources */,
+				5D912C1E14673A43000BFEA4 /* LogoutNormal.png in Resources */,
+				5D912C2114673AE6000BFEA4 /* LoginNormal.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1029,7 +1045,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ACSProduct/ACSProduct-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "ACSProduct/ACSProduct-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1043,7 +1059,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ACSProduct/ACSProduct-Prefix.pch";
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "ACSProduct/ACSProduct-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;

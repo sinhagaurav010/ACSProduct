@@ -239,10 +239,12 @@ static NSString* kSDKVersion = @"2";
  *   by SDK, NO otherwise.
  */
 - (BOOL)handleOpenURL:(NSURL *)url {
+    NSLog(@"her%@",url);
   // If the URL's structure doesn't match the structure used for Facebook authorization, abort.
   if (![[url absoluteString] hasPrefix:[NSString stringWithFormat:@"fb%@://authorize", _appId]]) {
     return NO;
   }
+    NSLog(@"eyeee");
 
   NSString *query = [url fragment];
 
