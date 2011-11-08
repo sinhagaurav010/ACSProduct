@@ -460,9 +460,10 @@
     FBRequest *request = [[FBRequest alloc] init];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hud.labelText = @"Loading...";
+
+    
     
     request = [_facebook requestWithGraphPath:@"me" andDelegate:self];
-    
 }
 
 /**
