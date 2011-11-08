@@ -30,10 +30,14 @@
 
 #define TYPECAT @"Cat"
 #define TYPEFEAT @"Feat"
+//fb169613193103512
 
+//#define  AppIDAPI @"169613193103512"
+//#define  AppSecret @"1e9a80bb2863ebba2b38de5a9751ffb0"
+//308790145802337
 
-#define  AppIDAPI @"169613193103512"
-#define  AppSecret @"1e9a80bb2863ebba2b38de5a9751ffb0"
+#define  AppIDAPI @"308790145802337"
+#define  AppSecret @"7e6f3e235b183cb2b24b69d414f09616"
 
 #define SAVEFAV @"FavACS"
 
