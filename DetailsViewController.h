@@ -18,6 +18,7 @@
 #import "FBLoginButton.h"
 #import "MBProgressHUD.h"
 #import "JSON.h"
+#import "ACSProductAppDelegate.h"
 
 @interface DetailsViewController : UIViewController<MFMailComposeViewControllerDelegate,FBSessionDelegate, FBRequestDelegate,FBDialogDelegate>
 {

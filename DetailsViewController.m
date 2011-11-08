@@ -121,9 +121,13 @@
 {
     ///FOR FACEBookINtegartion
 
+    ACSProductAppDelegate  * appDelegate = (ACSProductAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    // Grab the facebook object from the app delegate.
+    _facebook = appDelegate.facebook;
     _permissions =  [[NSArray arrayWithObjects:
                       @"read_stream", @"publish_stream", @"offline_access",@"email",@"user_birthday",@"user_photos",nil] retain];
-    _facebook = [[Facebook alloc] initWithAppId:AppIDAPI];
+   // _facebook = [[Facebook alloc] initWithAppId:AppIDAPI];
     
     //_facebook.sessionDelegate = self;
     
@@ -153,6 +157,7 @@
     arrayInfo = [[NSMutableArray alloc] initWithArray:[[NSArray alloc]initWithObjects:@"Name",@"Address",@"Email",@"Phone",@"Url", nil]];
     tableInfo.backgroundView = nil;
     tableInfo.backgroundColor = [UIColor clearColor];
+    tableInfo.hidden = NO;
     
     [viewForWebView.layer setCornerRadius:35.0f];
     [viewForWebView.layer setMasksToBounds:YES];
@@ -230,7 +235,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    NSLog(@"here");
     switch (indexPath.section) {
         case 3:
         {
@@ -242,7 +247,7 @@
         break;
         case 4:
         {
-            NSString *stringURL = [NSString stringWithFormat:[dictInfo objectForKey:FIELDURL]];
+            NSString *stringURL = [dictInfo objectForKey:FIELDURL];
             NSLog(@"%@",stringURL);
             NSURL *url = [NSURL URLWithString:stringURL];
             [[UIApplication sharedApplication] openURL:url];
@@ -389,6 +394,45 @@
             andParams:params
           andDelegate:self];
     
+}
+- (void)publishFeed{
+	
+    //	categoryListArray = [[CategoryDataDict objectForKey:[keyArray objectAtIndex:whichSectionSelected]] copy];
+    //	
+    //	NSLog(@"[CategoryDataDict allValues] = %@",categoryListArray);
+    //	[[categoryListArray objectAtIndex:whichRowSelected]getValue:&catDataStruct];
+	
+	//titleLabel.text = [NSString stringWithFormat:@"%@",p.newsTitle];
+	//descriptionLabel.text = [NSString stringWithFormat:@"%@",p.newsDescription];
+	//dateAndTimeLabel.text = [NSString stringWithFormat:@"%@",p.newsPubDate];
+//	NSString *tid=[NSString stringWithFormat:@"%l", _session.uid];
+//	NSString *body = [dictInfo objectForKey:FIELDDESC];
+//    //	if (isShareMail) {
+//    //		body = [NSString stringWithFormat:@"%@",[self flattenHTML:[detailsDictionary objectForKey:@"description"]]];
+//    //	}else {
+//    //		body = [NSString stringWithFormat:@"%@",[self flattenHTML:[[dealsDataArray objectAtIndex:dealsMailShowIndex] objectForKey:@"dealDetails"]]];
+//    //	}
+//	
+//	
+//    //  NSString *body    = [NSString stringWithFormat:@"%@",[self flattenHTML:[detailsDictionary objectForKey:@"description"]]];
+//	
+//	//  NSString *body    = @"This News is posted through News Paper App";
+//	
+//	//  float latitude = appDelegate.currentLocation.coordinate.latitude;
+//	//  float longitude = appDelegate.currentLocation.coordinate.longitude;
+//	
+//	// NSString *attach = [NSString stringWithFormat:@"{\"name\":\"Here I Am\",\"href\":\"http://maps.google.com/?q=%f,%f\",\"latitude\":\"%f\",\"longitude\":\"%f\",\"description\":\"Shared using GeoMashable on the iPad\",\"media\":[{\"type\":\"image\",\"src\":\"http://www.geomashable.com/images/icon.png\",\"href\":\"http://www.geomashable.com\"}],\"properties\":{\"Download\":{\"text\":\"Click here to Download now\",\"href\":\"http://www.geomashable.com\"}}}",latitude,longitude,latitude,longitude];
+//	
+//	// NSString *actionLinks = @"[{\"text\":\"iPhone\",\"href\":\"http://www.geomashable.com\"}]";
+//	// NSArray *obj = [NSArray arrayWithObjects:body,attach,actionLinks,[NSString stringWithFormat:@"%@", tid],nil];
+//	// NSArray *keys = [NSArray arrayWithObjects:@"message",@"attachment",@"action_links",@"target_id",nil];
+//	NSString *actionLinks = @"[{\"text\":\"iPhone\",\"href\":\"http://www.google.com\"}]";
+//	
+//	
+//    NSArray *obj = [NSArray arrayWithObjects:body,actionLinks,[NSString stringWithFormat:@"%@", tid],nil];
+//    NSArray *keys = [NSArray arrayWithObjects:@"message",@"action_links",@"target_id",nil];
+//    NSDictionary *params = [NSDictionary dictionaryWithObjects:obj forKeys:keys];
+//    [[FBRequest requestWithDelegate:self] call:@"facebook.stream.publish" params:params];
 }
 
 /**

@@ -6,14 +6,19 @@
 //  Copyright 2011 dhillon. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "HomePageController.h"
 #import "SplashScreenViewController.h"
 #import "DetailsViewController.h"
 #import "Facebook.h"
-@interface ACSProductAppDelegate : NSObject <UIApplicationDelegate> {
-    HomePageController *HomeController;
-    DetailsViewController *lginController;
+#import "Global.h"
+
+@interface ACSProductAppDelegate : NSObject <UIApplicationDelegate,FBSessionDelegate> 
+{
+    
+//    HomePageController *HomeController;
+//    DetailsViewController *lginController;
 
     SplashScreenViewController *SplashScreenController;
     UINavigationController *navigation;

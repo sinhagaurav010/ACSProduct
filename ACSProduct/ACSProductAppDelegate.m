@@ -9,15 +9,23 @@
 #import "ACSProductAppDelegate.h"
 
 @implementation ACSProductAppDelegate
-
+NSString * const FacebookAppID = AppIDAPI;
+NSString * const facebookAccessTokenKey = @"facebookAccessToken";
+NSString * const facebookExpirationDateKey = @"facebookExpirationDate";
 
 @synthesize window=_window;
 @synthesize facebook;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    lginController = [[DetailsViewController alloc] init];
+//    lginController = [[DetailsViewController alloc] init];
 
+    NSUserDefaults * defs = [NSUserDefaults standardUserDefaults];
+
+    facebook = [[Facebook alloc] initWithAppId:FacebookAppID];
+        facebook.accessToken = [defs stringForKey:facebookAccessTokenKey];
+        facebook.expirationDate = [defs objectForKey:facebookExpirationDateKey];    
+    
     locationUser = [[UserLocationFinder alloc] init ];
     [locationUser findCurrentLocation];
     
@@ -31,8 +39,9 @@
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    NSLog(@"ye");
-	return [lginController.facebook handleOpenURL:url];
+    BOOL ret = [facebook handleOpenURL:url]; 
+    NSLog(@"%d",ret);
+	return ret;
 }
 
 
