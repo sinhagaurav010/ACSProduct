@@ -58,22 +58,30 @@
 
 /*
  1) I can see the get direction feature (excellent) in the maps, but as yet the location services are still fixed on London rather than picking up my actual location.
+ Done
  
  2) I can see that the URL, phone and e-mail features are now all working, however:. The app should bring up the warning prompt about leaving the app to open the website from the URL, the app should bring up the warning prompt to ask if the user wants to dial the number as it currentlly does when selecting from the information page.
+ Done
+ 
  
  3) When selecting an item at present, I see the following issues: a) There is an > to the right of the Name, suggesting an option but there isnt one. There is an > to the right of the address, which I would have expected to take me to the address of the entry on the map? This doesn’t work yet.
+ Done
  
  4) There is a favourites option on the list and also on the bottom navigation. The list entry does not work, and I would suggest can be removed.
+ Did not get clarification from your side.
  
  5) The title on the favourites screen is 'Root View Controller'. Is there any limit to the number of favourites that can be added? Can we have a popup warning prompt as per the Phone and URL when adding an entry to the favourites?
+ Done
  
  6) The title on the nearby screen is 'Root View Controller'. Is there any limit to the number of favourites that can be added? Can we have a popup warning prompt as per the Phone and URL when adding an entry to the favourites?
+ Done
  
  7) There appear to be some stability issues. When I have been using the app and browsing around for a few minutes, it seems to go very slow and doesn’t show backgrounds on certain graphics like the main listview etc.
+ Still there(with testing it will resolve).
  
- 8) The search function does not work yet.
  
- 9) For future updates, can you dropbox the source code. The device I am using for testing is synced to a PC not my MAC, so I keep having to resync to test an ipa. I prefer to be able to build the Xcode and simulate that way. It also allows us to point to another URL for the data, which we have done successfully.
+ 8) For future updates, can you dropbox the source code. The device I am using for testing is synced to a PC not my MAC, so I keep having to resync to test an ipa. I prefer to be able to build the Xcode and simulate that way. It also allows us to point to another URL for the data, which we have done successfully.
+ Code is in git hub.
  
  */
 #import "DetailsViewController.h"
@@ -274,12 +282,11 @@
                                                             message:MAP_VISIT 
                                                            delegate:self 
                                                   cancelButtonTitle:nil
-                                                  otherButtonTitles:@"YES",@"NO", nil];
+                                                  otherButtonTitles:@"NO",@"YES", nil];
             alert.tag = 1;
             [alert show];
             [alert release];
-            
-            
+            break;
         }
         case 3:
         {
@@ -287,7 +294,7 @@
                                                             message:DIAL_A_NUMBER 
                                                            delegate:self 
                                                   cancelButtonTitle:nil
-                                                  otherButtonTitles:@"YES",@"NO", nil];
+                                                  otherButtonTitles:@"NO",@"YES", nil];
             alert.tag = 3;
             [alert show];
             [alert release];
@@ -299,7 +306,7 @@
                                                             message:WEBLINK_VISIT 
                                                            delegate:self 
                                                   cancelButtonTitle:nil
-                                                  otherButtonTitles:@"YES",@"NO", nil];
+                                                  otherButtonTitles:@"NO",@"YES", nil];
             alert.tag = 4;
             [alert show];
             [alert release];
@@ -314,9 +321,6 @@
         default:
             break;
     }
-    
-    
-    
 }
 
 
@@ -326,36 +330,40 @@
     
 	// Retrieve or create a cell
 	UITableViewCellStyle style =  UITableViewCellStyleDefault;
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BaseCell"];
-    if (!cell)
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:nil];
+    if (cell ==  nil)
     {
+        NSLog(@"chi");
+
         cell = [[[UITableViewCell alloc] initWithStyle:style reuseIdentifier:@"BaseCell"] autorelease];
         
+        if(indexPath.section != 0)
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
+        
+        switch (indexPath.section) {
+            case 0:
+                cell.textLabel.text = [dictInfo objectForKey:FIELDNAME];
+                break;
+            case 1:
+                cell.textLabel.text = [dictInfo objectForKey:FIELDADD];
+                break;
+            case 2:
+                cell.textLabel.text = [dictInfo objectForKey:FIELDEMAIL];
+                break;
+            case 3:
+                cell.textLabel.text = [dictInfo objectForKey:FIELDPHONE];
+                break;
+            case 4:
+                cell.textLabel.text = [dictInfo objectForKey:FIELDURL];
+                break;
+            default:
+                break;
+        }
+
     }
     
-    if(indexPath.section != 0)
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
-    switch (indexPath.section) {
-        case 0:
-            cell.textLabel.text = [dictInfo objectForKey:FIELDNAME];
-            break;
-        case 1:
-            cell.textLabel.text = [dictInfo objectForKey:FIELDADD];
-            break;
-        case 2:
-            cell.textLabel.text = [dictInfo objectForKey:FIELDEMAIL];
-            break;
-        case 3:
-            cell.textLabel.text = [dictInfo objectForKey:FIELDPHONE];
-            break;
-        case 4:
-            cell.textLabel.text = [dictInfo objectForKey:FIELDURL];
-            break;
-        default:
-            break;
-    }
-    //	ListCell *cell = (ListCell *)[tableView dequeueReusableCellWithIdentifier:@"ListCell"];
+        //	ListCell *cell = (ListCell *)[tableView dequeueReusableCellWithIdentifier:@"ListCell"];
     //	if (!cell) 
     //	{
     //		cell = [[[NSBundle mainBundle] loadNibNamed:@"ListCell" owner:self options:nil] lastObject];
@@ -377,12 +385,13 @@
 #pragma mark -Delegate AlertView-
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    
     if(buttonIndex == 1)
     {
         switch (alertView.tag) {
-            case 2:
+            case 1:
             {
-                NSString *stringURL = [NSString stringWithFormat:@"tel:%@",[dictInfo objectForKey:FIELDPHONE]];
+                NSString *stringURL = [NSString stringWithFormat:LINKMAPADD,[[dictInfo objectForKey:FIELDADD]stringByReplacingOccurrencesOfString:@" " withString:@"+"]];
                 NSLog(@"%@",stringURL);
                 NSURL *url = [NSURL URLWithString:stringURL];
                 [[UIApplication sharedApplication] openURL:url];

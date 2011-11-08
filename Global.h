@@ -92,7 +92,7 @@ BOOL KMselect;
 
 #define LINKMAPURL @"http://maps.google.com/maps?saddr=%@,%@&daddr=%@,%@"
 
-#define LINKMAPADD @"http://maps.google.com/maps?saddr=%@"
+#define LINKMAPADD @"http://maps.google.com/maps?q=%@"
 
 
 NSMutableArray *sortingArray;
