@@ -20,7 +20,7 @@
 #import "JSON.h"
 #import "ACSProductAppDelegate.h"
 
-@interface DetailsViewController : UIViewController<MFMailComposeViewControllerDelegate,FBSessionDelegate, FBRequestDelegate,FBDialogDelegate>
+@interface DetailsViewController : UIViewController<MFMailComposeViewControllerDelegate,FBSessionDelegate, FBRequestDelegate,FBDialogDelegate,UITableViewDelegate,UITableViewDataSource>
 {
     IBOutlet FBLoginButton* _fbButton;
 
@@ -39,7 +39,7 @@
 
 @property (retain, nonatomic) Facebook * facebook;
 
--(void)clickOn:(NSString *)stringEmailId;
+-(void)clickOn:(NSString *)stringEmailId withMessage:(NSString *)strMsg;
 
 @property(assign)BOOL isFromFav;
 -(IBAction)touchToAddFav:(id)sender;

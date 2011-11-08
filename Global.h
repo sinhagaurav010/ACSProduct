@@ -67,7 +67,10 @@ BOOL isSaveToFav;
 #define NAVIGATION_BAR_COLOR [[UIColor alloc] initWithRed:0.40 green:0.42 blue:0.48 alpha:1.0]
 #define LATSOURCE 51.502858
 #define LONGSOURCE -0.150223
-#define WEBLINK_VISIT @"Do you want to leave this application to open this website ?"
+#define WEBLINK_VISIT @"Do you want to leave this application to open this website?"
+
+#define MAP_VISIT @"Do you want to leave this application to open this location in map?"
+
 #define DIAL_A_NUMBER @"Do you want to dial this number ? "
 #define KM @"km"
 
@@ -87,7 +90,9 @@ NSMutableArray *arrayAllData;
 BOOL KMselect;
 
 
-#define LINKMAPURL @"maps://maps.google.com/maps?saddr=%@,%@&daddr=%@,%@"
+#define LINKMAPURL @"http://maps.google.com/maps?saddr=%@,%@&daddr=%@,%@"
+
+#define LINKMAPADD @"http://maps.google.com/maps?saddr=%@"
 
 
 NSMutableArray *sortingArray;

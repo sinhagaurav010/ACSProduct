@@ -56,7 +56,26 @@
  URL = "http://www.acs.com";
  */
 
-
+/*
+ 1) I can see the get direction feature (excellent) in the maps, but as yet the location services are still fixed on London rather than picking up my actual location.
+ 
+ 2) I can see that the URL, phone and e-mail features are now all working, however:. The app should bring up the warning prompt about leaving the app to open the website from the URL, the app should bring up the warning prompt to ask if the user wants to dial the number as it currentlly does when selecting from the information page.
+ 
+ 3) When selecting an item at present, I see the following issues: a) There is an > to the right of the Name, suggesting an option but there isnt one. There is an > to the right of the address, which I would have expected to take me to the address of the entry on the map? This doesn’t work yet.
+ 
+ 4) There is a favourites option on the list and also on the bottom navigation. The list entry does not work, and I would suggest can be removed.
+ 
+ 5) The title on the favourites screen is 'Root View Controller'. Is there any limit to the number of favourites that can be added? Can we have a popup warning prompt as per the Phone and URL when adding an entry to the favourites?
+ 
+ 6) The title on the nearby screen is 'Root View Controller'. Is there any limit to the number of favourites that can be added? Can we have a popup warning prompt as per the Phone and URL when adding an entry to the favourites?
+ 
+ 7) There appear to be some stability issues. When I have been using the app and browsing around for a few minutes, it seems to go very slow and doesn’t show backgrounds on certain graphics like the main listview etc.
+ 
+ 8) The search function does not work yet.
+ 
+ 9) For future updates, can you dropbox the source code. The device I am using for testing is synced to a PC not my MAC, so I keep having to resync to test an ipa. I prefer to be able to build the Xcode and simulate that way. It also allows us to point to another URL for the data, which we have done successfully.
+ 
+ */
 #import "DetailsViewController.h"
 
 @implementation DetailsViewController
@@ -98,7 +117,7 @@
 	[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
 	[[self navigationController] pushViewController:myInfoScreenController animated:NO];
 	[UIView commitAnimations];
-
+    
 }
 -(IBAction)touchForMap:(id)sender
 {
@@ -120,14 +139,14 @@
 - (void)viewDidLoad
 {
     ///FOR FACEBookINtegartion
-
+    
     ACSProductAppDelegate  * appDelegate = (ACSProductAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     // Grab the facebook object from the app delegate.
     _facebook = appDelegate.facebook;
     _permissions =  [[NSArray arrayWithObjects:
                       @"read_stream", @"publish_stream", @"offline_access",@"email",@"user_birthday",@"user_photos",nil] retain];
-   // _facebook = [[Facebook alloc] initWithAppId:AppIDAPI];
+    // _facebook = [[Facebook alloc] initWithAppId:AppIDAPI];
     
     //_facebook.sessionDelegate = self;
     
@@ -146,11 +165,11 @@
     
     if(isFromFav == 1)
         buttonFav.hidden = YES;
-        
-   UIBarButtonItem *imageButton = [[UIBarButtonItem alloc] initWithTitle:@"Images"
-                                                                   style:UIBarButtonItemStyleDone
-                                                                  target:self
-                                                                  action:@selector(imageButtonClicked:)];
+    
+    UIBarButtonItem *imageButton = [[UIBarButtonItem alloc] initWithTitle:@"Images"
+                                                                    style:UIBarButtonItemStyleDone
+                                                                   target:self
+                                                                   action:@selector(imageButtonClicked:)];
     self.navigationItem.rightBarButtonItem = imageButton;
     [imageButton release];
 	
@@ -161,11 +180,15 @@
     
     [viewForWebView.layer setCornerRadius:35.0f];
     [viewForWebView.layer setMasksToBounds:YES];
-
-//    webViewInfo.backgroundColor = [UIColor colorWithRed:.96
-//                                                  green:.57
-//                                                   blue:.12
-//                                                  alpha:1.0];
+    
+    tableInfo.delegate = self;
+    tableInfo.dataSource  = self;
+    [tableInfo reloadData];
+    
+    //    webViewInfo.backgroundColor = [UIColor colorWithRed:.96
+    //                                                  green:.57
+    //                                                   blue:.12
+    //                                                  alpha:1.0];
     
     [webViewInfo loadHTMLString:[dictInfo objectForKey:FIELDDESC] baseURL:nil];
     NSLog(@"-----%@",dictInfo);
@@ -191,7 +214,7 @@
 }
 
 
--(void)clickOn:(NSString *)stringEmailId
+-(void)clickOn:(NSString *)stringEmailId withMessage:(NSString *)strMsg
 {
     //NSLog(@"clickon");
 	NSArray *arrayRec = [NSArray arrayWithObjects:stringEmailId,nil];
@@ -202,15 +225,22 @@
 		mcvc.mailComposeDelegate = self;
 		//[mcvc setSubject:EMAILSUB];
 		[mcvc setToRecipients:arrayRec];
+        
+        
         //		NSString *messageBdy = [NSString stringWithFormat:@"Name %@<br>Phone %@ <br>Address %@<br>%@<br>City %@ <br>%@<br> %@<br>special features%@",textname.text,textphone.text,textAddress.text,buttonTime.titleLabel.text,textCity.text,buttonBed.titleLabel.text,buttonBath.titleLabel.text,textfea.text];
-        //		[mcvc setMessageBody:messageBdy isHTML:YES];
-		//[mcvc addAttachmentData:UIImageJPEGRepresentation(imageToEmail, 1.0f) mimeType:@"image/jpeg" fileName:@"pickerimage.jpg"];
+        
+        [mcvc setMessageBody:strMsg    isHTML:NO];
+		
+        //[mcvc addAttachmentData:UIImageJPEGRepresentation(imageToEmail, 1.0f) mimeType:@"image/jpeg" fileName:@"pickerimage.jpg"];
 		[self presentModalViewController:mcvc animated:YES];
 	}	
     else
     {
         UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Info"
-                                                           message:@"Please Configure Email" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                                                           message:@"Please Configure Email" 
+                                                          delegate:self
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles: nil];
         [alerView show];
         [alerView release];
     }
@@ -218,6 +248,7 @@
 #pragma mark -
 #pragma mark - UITableView delegates
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    NSLog(@"%d",[arrayInfo count]);
 	// The number of sections is based on the number of items in the data property list.
 	return [arrayInfo count];
 }
@@ -237,35 +268,58 @@
 {
     NSLog(@"here");
     switch (indexPath.section) {
+        case 1:
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Info" 
+                                                            message:MAP_VISIT 
+                                                           delegate:self 
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"YES",@"NO", nil];
+            alert.tag = 1;
+            [alert show];
+            [alert release];
+            
+            
+        }
         case 3:
         {
-            NSString *stringURL = [NSString stringWithFormat:@"tel:%@",[dictInfo objectForKey:FIELDPHONE]];
-            NSLog(@"%@",stringURL);
-            NSURL *url = [NSURL URLWithString:stringURL];
-            [[UIApplication sharedApplication] openURL:url];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Info" 
+                                                            message:DIAL_A_NUMBER 
+                                                           delegate:self 
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"YES",@"NO", nil];
+            alert.tag = 3;
+            [alert show];
+            [alert release];
+            break;
         }
-        break;
         case 4:
         {
-            NSString *stringURL = [dictInfo objectForKey:FIELDURL];
-            NSLog(@"%@",stringURL);
-            NSURL *url = [NSURL URLWithString:stringURL];
-            [[UIApplication sharedApplication] openURL:url];
-        }
-        break;
-        case 2:
-        {
-            [self clickOn:[dictInfo objectForKey:FIELDEMAIL]];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Info" 
+                                                            message:WEBLINK_VISIT 
+                                                           delegate:self 
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"YES",@"NO", nil];
+            alert.tag = 4;
+            [alert show];
+            [alert release];
         }
             break;
-
+        case 2:
+        {
+            [self clickOn:[dictInfo objectForKey:FIELDEMAIL] withMessage:nil];
+        }
+            break;
+            
         default:
             break;
     }
-   
     
-
+    
+    
 }
+
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {	
 	NSLog(@"cell");
@@ -276,14 +330,17 @@
     if (!cell)
     {
         cell = [[[UITableViewCell alloc] initWithStyle:style reuseIdentifier:@"BaseCell"] autorelease];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
     }
+    
+    if(indexPath.section != 0)
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     switch (indexPath.section) {
         case 0:
             cell.textLabel.text = [dictInfo objectForKey:FIELDNAME];
             break;
-         case 1:
+        case 1:
             cell.textLabel.text = [dictInfo objectForKey:FIELDADD];
             break;
         case 2:
@@ -316,6 +373,44 @@
     return (UITableViewCell *)cell;
 	
 }
+
+#pragma mark -Delegate AlertView-
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 1)
+    {
+        switch (alertView.tag) {
+            case 2:
+            {
+                NSString *stringURL = [NSString stringWithFormat:@"tel:%@",[dictInfo objectForKey:FIELDPHONE]];
+                NSLog(@"%@",stringURL);
+                NSURL *url = [NSURL URLWithString:stringURL];
+                [[UIApplication sharedApplication] openURL:url];
+                break;
+            }  
+            case 3:
+            {
+                NSString *stringURL = [NSString stringWithFormat:@"tel:%@",[dictInfo objectForKey:FIELDPHONE]];
+                NSLog(@"%@",stringURL);
+                NSURL *url = [NSURL URLWithString:stringURL];
+                [[UIApplication sharedApplication] openURL:url];
+                break;
+            }    
+            case 4:
+            {
+                NSString *stringURL = [dictInfo objectForKey:FIELDURL];
+                NSLog(@"%@",stringURL);
+                NSURL *url = [NSURL URLWithString:stringURL];
+                [[UIApplication sharedApplication] openURL:url];            
+                break;
+            }
+            default:
+                break;
+        }
+    }
+}
+
+#pragma mark -code for Facebook-
 
 - (void)login {
     NSLog(@"Login Press");
@@ -405,34 +500,34 @@
 	//titleLabel.text = [NSString stringWithFormat:@"%@",p.newsTitle];
 	//descriptionLabel.text = [NSString stringWithFormat:@"%@",p.newsDescription];
 	//dateAndTimeLabel.text = [NSString stringWithFormat:@"%@",p.newsPubDate];
-//	NSString *tid=[NSString stringWithFormat:@"%l", _session.uid];
-//	NSString *body = [dictInfo objectForKey:FIELDDESC];
-//    //	if (isShareMail) {
-//    //		body = [NSString stringWithFormat:@"%@",[self flattenHTML:[detailsDictionary objectForKey:@"description"]]];
-//    //	}else {
-//    //		body = [NSString stringWithFormat:@"%@",[self flattenHTML:[[dealsDataArray objectAtIndex:dealsMailShowIndex] objectForKey:@"dealDetails"]]];
-//    //	}
-//	
-//	
-//    //  NSString *body    = [NSString stringWithFormat:@"%@",[self flattenHTML:[detailsDictionary objectForKey:@"description"]]];
-//	
-//	//  NSString *body    = @"This News is posted through News Paper App";
-//	
-//	//  float latitude = appDelegate.currentLocation.coordinate.latitude;
-//	//  float longitude = appDelegate.currentLocation.coordinate.longitude;
-//	
-//	// NSString *attach = [NSString stringWithFormat:@"{\"name\":\"Here I Am\",\"href\":\"http://maps.google.com/?q=%f,%f\",\"latitude\":\"%f\",\"longitude\":\"%f\",\"description\":\"Shared using GeoMashable on the iPad\",\"media\":[{\"type\":\"image\",\"src\":\"http://www.geomashable.com/images/icon.png\",\"href\":\"http://www.geomashable.com\"}],\"properties\":{\"Download\":{\"text\":\"Click here to Download now\",\"href\":\"http://www.geomashable.com\"}}}",latitude,longitude,latitude,longitude];
-//	
-//	// NSString *actionLinks = @"[{\"text\":\"iPhone\",\"href\":\"http://www.geomashable.com\"}]";
-//	// NSArray *obj = [NSArray arrayWithObjects:body,attach,actionLinks,[NSString stringWithFormat:@"%@", tid],nil];
-//	// NSArray *keys = [NSArray arrayWithObjects:@"message",@"attachment",@"action_links",@"target_id",nil];
-//	NSString *actionLinks = @"[{\"text\":\"iPhone\",\"href\":\"http://www.google.com\"}]";
-//	
-//	
-//    NSArray *obj = [NSArray arrayWithObjects:body,actionLinks,[NSString stringWithFormat:@"%@", tid],nil];
-//    NSArray *keys = [NSArray arrayWithObjects:@"message",@"action_links",@"target_id",nil];
-//    NSDictionary *params = [NSDictionary dictionaryWithObjects:obj forKeys:keys];
-//    [[FBRequest requestWithDelegate:self] call:@"facebook.stream.publish" params:params];
+    //	NSString *tid=[NSString stringWithFormat:@"%l", _session.uid];
+    //	NSString *body = [dictInfo objectForKey:FIELDDESC];
+    //    //	if (isShareMail) {
+    //    //		body = [NSString stringWithFormat:@"%@",[self flattenHTML:[detailsDictionary objectForKey:@"description"]]];
+    //    //	}else {
+    //    //		body = [NSString stringWithFormat:@"%@",[self flattenHTML:[[dealsDataArray objectAtIndex:dealsMailShowIndex] objectForKey:@"dealDetails"]]];
+    //    //	}
+    //	
+    //	
+    //    //  NSString *body    = [NSString stringWithFormat:@"%@",[self flattenHTML:[detailsDictionary objectForKey:@"description"]]];
+    //	
+    //	//  NSString *body    = @"This News is posted through News Paper App";
+    //	
+    //	//  float latitude = appDelegate.currentLocation.coordinate.latitude;
+    //	//  float longitude = appDelegate.currentLocation.coordinate.longitude;
+    //	
+    //	// NSString *attach = [NSString stringWithFormat:@"{\"name\":\"Here I Am\",\"href\":\"http://maps.google.com/?q=%f,%f\",\"latitude\":\"%f\",\"longitude\":\"%f\",\"description\":\"Shared using GeoMashable on the iPad\",\"media\":[{\"type\":\"image\",\"src\":\"http://www.geomashable.com/images/icon.png\",\"href\":\"http://www.geomashable.com\"}],\"properties\":{\"Download\":{\"text\":\"Click here to Download now\",\"href\":\"http://www.geomashable.com\"}}}",latitude,longitude,latitude,longitude];
+    //	
+    //	// NSString *actionLinks = @"[{\"text\":\"iPhone\",\"href\":\"http://www.geomashable.com\"}]";
+    //	// NSArray *obj = [NSArray arrayWithObjects:body,attach,actionLinks,[NSString stringWithFormat:@"%@", tid],nil];
+    //	// NSArray *keys = [NSArray arrayWithObjects:@"message",@"attachment",@"action_links",@"target_id",nil];
+    //	NSString *actionLinks = @"[{\"text\":\"iPhone\",\"href\":\"http://www.google.com\"}]";
+    //	
+    //	
+    //    NSArray *obj = [NSArray arrayWithObjects:body,actionLinks,[NSString stringWithFormat:@"%@", tid],nil];
+    //    NSArray *keys = [NSArray arrayWithObjects:@"message",@"action_links",@"target_id",nil];
+    //    NSDictionary *params = [NSDictionary dictionaryWithObjects:obj forKeys:keys];
+    //    [[FBRequest requestWithDelegate:self] call:@"facebook.stream.publish" params:params];
 }
 
 /**
@@ -457,15 +552,23 @@
     NSLog(@"fbLogin");
     _fbButton.isLoggedIn = YES;
     [_fbButton updateImage];
-    FBRequest *request = [[FBRequest alloc] init];
+    // FBRequest *request = [[FBRequest alloc] init];
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hud.labelText = @"Loading...";
-
+    //
+    //    
+    //    
+    //    request = [_facebook requestWithGraphPath:@"me" andDelegate:self];
+    NSMutableDictionary *variables = [NSMutableDictionary dictionaryWithCapacity:4];
     
+    //[variables setObject:@"http://farm6.static.flickr.com/5015/5570946750_a486e741.jpg" forKey:@"link"];
+    //[variables setObject:@"http://farm6.static.flickr.com/5015/5570946750_a486e741.jpg" forKey:@"picture"];
+    [variables setObject:@"You scored 99999" forKey:@"name"];
+    [variables setObject:@" " forKey:@"caption"];
+    [variables setObject:[NSString stringWithFormat:@"%@",[dictInfo objectForKey:FIELDDESC]] forKey:@"message"];
     
-    request = [_facebook requestWithGraphPath:@"me" andDelegate:self];
+    [_facebook requestWithMethodName:@"stream.publish" andParams:variables andHttpMethod:@"POST" andDelegate:self];
 }
-
 /**
  * Called when the user canceled the authorization dialog.
  */
@@ -497,54 +600,59 @@
     
 }
 - (void)request:(FBRequest *)request didLoad:(id)result {
-    NSLog(@"get response%@",result);
+    [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+    
+    [ModalController showTheAlertWithMsg:@"Posted in FaceBook" 
+                               withTitle:@"Success"
+                            inController:self];
+    
     // [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];    
     
-//    if ([result isKindOfClass:[NSDictionary class]]) {
-//        dictResponse = [[NSMutableDictionary alloc] init];
-//        
-//        if([result objectForKey:@"birthday"])
-//            [dictResponse setObject:[result objectForKey:@"birthday"] forKey:@"birthday"];
-//        if([result objectForKey:@"email"])
-//            [dictResponse setObject:[result objectForKey:@"email"] forKey:@"email"];
-//        if([result objectForKey:@"first_name"])
-//            [dictResponse setObject:[result objectForKey:@"first_name"] forKey:@"first_name"];
-//        if([result objectForKey:@"last_name"])
-//            [dictResponse setObject:[result objectForKey:@"last_name"] forKey:@"last_name"];
-//        if([result objectForKey:@"gender"])
-//            [dictResponse setObject:[result objectForKey:@"gender"] forKey:@"gender"];
-//        if([result objectForKey:@"work"])
-//            if([[[result objectForKey:@"work"] objectAtIndex:0] objectForKey:@"employer"])
-//                if([[[[result objectForKey:@"work"] objectAtIndex:0] objectForKey:@"employer"] objectForKey:@"name"])
-//                    [dictResponse setObject:[[[[result objectForKey:@"work"] objectAtIndex:0]  
-//                                              objectForKey:@"employer"] 
-//                                             objectForKey:@"name"] forKey:@"employee"];
-//        
-//        if ([result objectForKey:@"id"]) {
-//            [dictResponse setObject:[result objectForKey:@"id"] forKey:@"fbId"];
-//        }
-//        
-//        modal = [[ModalController alloc] init];
-//        
-//        NSString *stringAuthLogin = [NSString stringWithFormat:@"email=%@&facebook_id=%@",[dictResponse 
-//                                                                                           objectForKey:@"email"],[dictResponse objectForKey:@"fbId"]];
-//        
-//        ////NSLog(@"string%@",stringAuthLogin);
-//        
-//        modal.delegate = self;
-//        
-//        //        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-//        //        hud.labelText = @"Loading...";
-//        
-//        [modal sendTheRequestWithPostString:stringAuthLogin withURLString:URLFACEBOOKLOGIN];
-        /////////////////////////
-        //        RegistrationViewController *RegistrationController = [[RegistrationViewController alloc] init];
-        //        RegistrationController.dictFacebook = [NSMutableDictionary dictionaryWithDictionary:dictResponse];
-        //        [self.navigationController pushViewController:RegistrationController animated:YES];
-        
-        //[dictResponse release];
-        
-//}
+    //    if ([result isKindOfClass:[NSDictionary class]]) {
+    //        dictResponse = [[NSMutableDictionary alloc] init];
+    //        
+    //        if([result objectForKey:@"birthday"])
+    //            [dictResponse setObject:[result objectForKey:@"birthday"] forKey:@"birthday"];
+    //        if([result objectForKey:@"email"])
+    //            [dictResponse setObject:[result objectForKey:@"email"] forKey:@"email"];
+    //        if([result objectForKey:@"first_name"])
+    //            [dictResponse setObject:[result objectForKey:@"first_name"] forKey:@"first_name"];
+    //        if([result objectForKey:@"last_name"])
+    //            [dictResponse setObject:[result objectForKey:@"last_name"] forKey:@"last_name"];
+    //        if([result objectForKey:@"gender"])
+    //            [dictResponse setObject:[result objectForKey:@"gender"] forKey:@"gender"];
+    //        if([result objectForKey:@"work"])
+    //            if([[[result objectForKey:@"work"] objectAtIndex:0] objectForKey:@"employer"])
+    //                if([[[[result objectForKey:@"work"] objectAtIndex:0] objectForKey:@"employer"] objectForKey:@"name"])
+    //                    [dictResponse setObject:[[[[result objectForKey:@"work"] objectAtIndex:0]  
+    //                                              objectForKey:@"employer"] 
+    //                                             objectForKey:@"name"] forKey:@"employee"];
+    //        
+    //        if ([result objectForKey:@"id"]) {
+    //            [dictResponse setObject:[result objectForKey:@"id"] forKey:@"fbId"];
+    //        }
+    //        
+    //        modal = [[ModalController alloc] init];
+    //        
+    //        NSString *stringAuthLogin = [NSString stringWithFormat:@"email=%@&facebook_id=%@",[dictResponse 
+    //                                                                                           objectForKey:@"email"],[dictResponse objectForKey:@"fbId"]];
+    //        
+    //        ////NSLog(@"string%@",stringAuthLogin);
+    //        
+    //        modal.delegate = self;
+    //        
+    //        //        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    //        //        hud.labelText = @"Loading...";
+    //        
+    //        [modal sendTheRequestWithPostString:stringAuthLogin withURLString:URLFACEBOOKLOGIN];
+    /////////////////////////
+    //        RegistrationViewController *RegistrationController = [[RegistrationViewController alloc] init];
+    //        RegistrationController.dictFacebook = [NSMutableDictionary dictionaryWithDictionary:dictResponse];
+    //        [self.navigationController pushViewController:RegistrationController animated:YES];
+    
+    //[dictResponse release];
+    
+    //}
     //	[self dismissModalViewControllerAnimated:TRUE];
 }
 
@@ -563,6 +671,10 @@
  * successfully.
  */
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
+    [MBProgressHUD hideHUDForView:self.navigationController.view
+                         animated:YES];
+    
+    [ModalController    showTheAlertWithMsg:@"Failed To Post" withTitle:@"Sorry" inController:self];
 }
 
 
@@ -585,9 +697,13 @@
 }
 -(IBAction)ShareTwitter:(id)sender
 {
+    [ModalController showTheAlertWithMsg:@"Comming Soon" 
+                               withTitle:@"Info"
+                            inController:self];
 }
 -(IBAction)EmailToFriend:(id)sender
 {
+    [self clickOn:nil withMessage:[dictInfo objectForKey:FIELDDESC]]; 
 }
 
 - (void)viewDidUnload
