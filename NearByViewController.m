@@ -65,6 +65,7 @@
 }
 
 #pragma mark -Delegate viewToolPicker-
+
 -(void)pressDoneForSel:(NSString *)stringSel withindex:(NSInteger)indexRow
 {
     pickerDis.hidden = YES;
@@ -112,7 +113,7 @@
 
     
     NSArray *arrayDistance = [NSArray arrayWithObjects:@"0-50",@"0-100",@"0-150",@"0-200",@"0-250", nil];
-    arrayDistanceFilter = [[NSMutableArray alloc] initWithArray:[NSArray arrayWithObjects:@"6805",@"6600",@"6719",@"6720",@"250", nil]];
+    arrayDistanceFilter = [[NSMutableArray alloc] initWithArray:[NSArray arrayWithObjects:@"50",@"100",@"150",@"200",@"250", nil]];
     
     NSMutableArray *arrayDis = [[NSMutableArray alloc] initWithArray:arrayDistance];
     
