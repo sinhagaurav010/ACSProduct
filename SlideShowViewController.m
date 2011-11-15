@@ -117,7 +117,7 @@
     
     self.downloads = [[MultipleDownload alloc] initWithUrls: urls];
     self.downloads.delegate = self;
-    
+
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 }

@@ -13,14 +13,19 @@
 #import "ListCell.h"
 #import "DetailsViewController.h"
 #import "ViewPickerTool.h"
+#import "MultipleDownload.h"
+#import "CustomTableCell.h"
+
 
 @interface NearByViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,cutomDelegateToolPicker> {
     NSMutableArray *arrayDistanceFilter;
     ViewPickerTool *pickerDis;
-    NSMutableArray *arrayNearBy;
     IBOutlet UITableView *tableNearBy;
     IBOutlet UILabel *lableNoNearBy;
 }
 -(void)tableViewSettingWithRad:(NSInteger)radius;
+@property(nonatomic,retain)    MultipleDownload   *downloads;
+@property(nonatomic,retain)    NSMutableArray   *urls;
+@property(retain)    NSMutableArray *arrayImageView;
 
 @end

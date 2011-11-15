@@ -77,7 +77,7 @@
     
     if(isFromDetail == 0)
     {
-        arrayMapLocs = [[NSMutableArray alloc] initWithArray:arrayAllData];
+        arrayMapLocs = [[NSMutableArray alloc] initWithArray:arrayNearBy];
     }
     for(int i=0;i<[arrayMapLocs count];i++)
     {
