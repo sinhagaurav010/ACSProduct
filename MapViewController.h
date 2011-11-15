@@ -14,6 +14,9 @@
     NSMutableArray *arrayLatLong;
     
 }
+
+-(void)loadMap;
+
 @property(retain)NSMutableArray *arrayMapLocs;
 @property(assign)BOOL isFromDetail;
 @end

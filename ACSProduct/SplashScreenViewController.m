@@ -76,7 +76,15 @@
     
     [self.navigationController pushViewController:tabBarController
                                          animated:YES];
+    arrayNearBy = [[NSMutableArray alloc] init];
     
+    for(int i=0;i<[arrayAllData  count];i++)
+    {
+        if((int)[ModalController  calDistancebetWithLat:[locationUser.strUserLat doubleValue] with:[locationUser.strUserLong doubleValue] with:[[[arrayAllData objectAtIndex:i ]objectForKey:@"Lat"]doubleValue] with:[[[arrayAllData objectAtIndex:i ]objectForKey:@"Long"]doubleValue]]<50)
+        {
+            [arrayNearBy addObject:[arrayAllData objectAtIndex:i]];
+        }
+    }
 }
 
 -(void)getError

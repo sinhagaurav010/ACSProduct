@@ -11,7 +11,7 @@
 
 
 @implementation CustomTableCell
-@synthesize title,subtitle,venueNameLabel,costLabel,distanceLabel,dealLabel;
+@synthesize title,subtitle,venueNameLabel,costLabel,distanceLabel,dealLabel,imageViewM;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -19,10 +19,10 @@
     if (self) {
         if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
             
-            imageView = [[UIImageView     alloc] init];
+            self.imageViewM = [[UIImageView     alloc] init];
             //imageView.frame = CGRectMake(4, 4, 62, 62);
-            imageView.frame = CGRectMake(4.0f, 4.0f, 36.0f, 36.0f);
-            [self addSubview:imageView];
+            self.imageViewM.frame = CGRectMake(4.0f, 4.0f, 36.0f, 36.0f);
+            [self addSubview:imageViewM];
 
             
 //            self.title = [[UILabel alloc] initWithFrame:CGRectMake(72, 4, 200, 30)];
@@ -43,7 +43,7 @@
             self.venueNameLabel.backgroundColor = [UIColor clearColor];
             [self addSubview:venueNameLabel];
             
-            self.distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(148, 23,64,21)];
+            self.distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(148, 23,164,21)];
             self.distanceLabel.font = [UIFont systemFontOfSize:12];
             self.distanceLabel.backgroundColor = [UIColor clearColor];
             [self addSubview:distanceLabel];
@@ -95,7 +95,7 @@
 
 - (void)setPhotoFromUrl:(NSString*)flickrPhoto
 {
-    [self.imageView setImageWithURL:[NSURL URLWithString:flickrPhoto]
+    [self.imageViewM setImageWithURL:[NSURL URLWithString:flickrPhoto]
                    placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
 }
 

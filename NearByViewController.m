@@ -119,7 +119,6 @@
     
     arrayNearBy = [[NSMutableArray alloc] init];
     
-    NSLog(@"hihnihhi");
     for(int i=0;i<[arrayAllData  count];i++)
     {
         if((int)[ModalController  calDistancebetWithLat:[locationUser.strUserLat doubleValue] with:[locationUser.strUserLong doubleValue] with:[[[arrayAllData objectAtIndex:i ]objectForKey:@"Lat"]doubleValue] with:[[[arrayAllData objectAtIndex:i ]objectForKey:@"Long"]doubleValue]]<radius)
@@ -200,13 +199,6 @@
 	{
         NSLog(@"heres");
         cell = [[CustomTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ListCell"];
-        
-        [cell settitlestr:[[arrayNearBy objectAtIndex:indexPath.row] objectForKey:FIELDNAME]];
-        [cell setCostLabelstr:[NSString stringWithFormat:@"$%@",[[arrayNearBy objectAtIndex:indexPath.row] objectForKey:FIELDCOST]]];
-        [cell setDistanceLabelstr:[NSString stringWithFormat:@"%.3fKm",[ModalController  calDistancebetWithLat:[locationUser.strUserLat doubleValue] with:[locationUser.strUserLong doubleValue] with:[[[arrayNearBy objectAtIndex:indexPath.row ]objectForKey:@"Lat"]doubleValue] with:[[[arrayNearBy objectAtIndex:indexPath.row ]objectForKey:@"Long"]doubleValue]]]];
-        [cell setDealLabelstr:[[arrayNearBy objectAtIndex:indexPath.row] objectForKey:FIELDDEAL]];
-        [cell setPhotoFromUrl:[[[[arrayNearBy objectAtIndex:indexPath.row]objectForKey:FIELDIMAGES]objectForKey:FIELDIMAGE]objectAtIndex:0]];
-        
 //		cell = [[[NSBundle mainBundle] loadNibNamed:@"ListCell" owner:self options:nil] lastObject] ;
 //		cell.backgroundColor=[UIColor whiteColor];
 //		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -219,7 +211,13 @@
 //        //cell.imageMain.imageURL = [NSURL URLWithString:[[[[arrayNearBy objectAtIndex:indexPath.row]objectForKey:FIELDIMAGES]objectForKey:FIELDIMAGE]objectAtIndex:0]];
 //        cell.venueImage.image = [(UIImageView *)[arrayImageView objectAtIndex:indexPath.row] image];
 	}
-	
+    cell.accessoryType = 1;
+    
+	[cell settitlestr:[[arrayNearBy objectAtIndex:indexPath.row] objectForKey:FIELDNAME]];
+    [cell setCostLabelstr:[NSString stringWithFormat:@"$%@",[[arrayNearBy objectAtIndex:indexPath.row] objectForKey:FIELDCOST]]];
+    [cell setDistanceLabelstr:[NSString stringWithFormat:@"%.3fKm",[ModalController  calDistancebetWithLat:[locationUser.strUserLat doubleValue] with:[locationUser.strUserLong doubleValue] with:[[[arrayNearBy objectAtIndex:indexPath.row ]objectForKey:@"Lat"]doubleValue] with:[[[arrayNearBy objectAtIndex:indexPath.row ]objectForKey:@"Long"]doubleValue]]]];
+    [cell setDealLabelstr:[[arrayNearBy objectAtIndex:indexPath.row] objectForKey:FIELDDEAL]];
+    [cell setPhotoFromUrl:[[[[arrayNearBy objectAtIndex:indexPath.row]objectForKey:FIELDIMAGES]objectForKey:FIELDIMAGE]objectAtIndex:0]];
     
     //cell.venueImage.image = [(UIImageView*)[arrayImages objectAtIndex:indexPath.row] image];
     return (UITableViewCell *)cell;

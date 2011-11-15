@@ -13,7 +13,7 @@
 #import "DetailsViewController.h"
 #import "ModalController.h"
 #import "UserLocationFinder.h"
-
+#import "CustomTableCell.h"
 @interface ListViewController : UIViewController {
     IBOutlet UITableView *tableList;
     NSMutableArray *arrayList;

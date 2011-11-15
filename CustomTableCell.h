@@ -17,6 +17,8 @@
     UILabel *venueNameLabel,*costLabel,*distanceLabel;
 }
 @property(nonatomic,retain)UILabel *title;
+@property(nonatomic,retain)UIImageView *imageViewM;
+
 @property(nonatomic,retain)UILabel *subtitle;
 @property(nonatomic,retain)UILabel *venueNameLabel,*costLabel,*distanceLabel,*dealLabel;
 

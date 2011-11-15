@@ -55,7 +55,11 @@
 
 
 #pragma mark - View lifecycle
-
+- (void)viewDidAppear:(BOOL)animated
+{
+    NSLog(@"did appear");
+    [self loadMap];
+}
 - (void)viewDidLoad
 {
     [self.navigationController.navigationBar setTintColor:[UIColor blackColor] ];
@@ -63,29 +67,46 @@
     [self.navigationItem setTitle:MAPTITLE];
     
     
+   
+
+    
+    //[self functionToCheckLat:arrayMapContent]];
+
+   
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+}
+-(void)loadMap
+{
+    if(customMap)
+    {
+        [customMap removeFromSuperview];
+        [customMap release];        
+        customMap = nil;
+    }   
+    
     customMap = [[CustomMapView alloc] initWithFrame:self.view.bounds];
     customMap.client = self;	
     customMap.mapType = MKMapTypeStandard;
     
     customMap.showsUserLocation = YES;
     [self.view insertSubview:customMap atIndex:1];
-
     
-    //[self functionToCheckLat:arrayMapContent]];
-
     arrayLatLong = [[NSMutableArray alloc] init];
     
     if(isFromDetail == 0)
     {
+        NSLog(@"here");
         arrayMapLocs = [[NSMutableArray alloc] initWithArray:arrayNearBy];
     }
+    
     for(int i=0;i<[arrayMapLocs count];i++)
     {
         NSMutableDictionary *dictLong = [[NSMutableDictionary alloc] init];
         [dictLong setObject:[[arrayMapLocs objectAtIndex:i ]objectForKey:FIELDLAT] forKey:FIELDLAT];
         [dictLong setObject:[[arrayMapLocs objectAtIndex:i ]objectForKey:FIELDLONG] forKey:FIELDLONG];
         [dictLong setObject:[[arrayMapLocs objectAtIndex:i ]objectForKey:FIELDNAME] forKey:@"title"];
-
+        
         [arrayLatLong addObject:dictLong];
         [dictLong release];
     }
@@ -98,13 +119,12 @@
                                                                action:@selector(Direction)];
         self.navigationItem.rightBarButtonItem = btn;
         [btn release];
-
     }
     
     [customMap customizeMap:arrayLatLong];
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
 }
+
+#pragma mark -clickAtindex-
 
 -(void)clickAtindex:(NSInteger)index
 {
