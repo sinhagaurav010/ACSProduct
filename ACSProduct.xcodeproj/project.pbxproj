@@ -26,6 +26,7 @@
 		1CC55AEE14652EA400F1012B /* FBLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC55AED14652EA400F1012B /* FBLoginButton.m */; };
 		1CCF1A751446F25100D59040 /* ListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CCF1A731446F25100D59040 /* ListCell.m */; };
 		1CCF1A761446F25100D59040 /* ListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CCF1A741446F25100D59040 /* ListCell.xib */; };
+		1CEDE75F147262170057E5D1 /* ViewPickerTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CEDE75E147262170057E5D1 /* ViewPickerTool.m */; };
 		5D208136143E287F00D6B481 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D208135143E287F00D6B481 /* UIKit.framework */; };
 		5D208138143E287F00D6B481 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D208137143E287F00D6B481 /* Foundation.framework */; };
 		5D20813A143E287F00D6B481 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D208139143E287F00D6B481 /* CoreGraphics.framework */; };
@@ -184,6 +185,8 @@
 		1CCF1A721446F25100D59040 /* ListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListCell.h; sourceTree = "<group>"; };
 		1CCF1A731446F25100D59040 /* ListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListCell.m; sourceTree = "<group>"; };
 		1CCF1A741446F25100D59040 /* ListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListCell.xib; sourceTree = "<group>"; };
+		1CEDE75D147262170057E5D1 /* ViewPickerTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewPickerTool.h; sourceTree = "<group>"; };
+		1CEDE75E147262170057E5D1 /* ViewPickerTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewPickerTool.m; sourceTree = "<group>"; };
 		5D208131143E287F00D6B481 /* ACSProduct.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ACSProduct.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D208135143E287F00D6B481 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5D208137143E287F00D6B481 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -422,9 +425,19 @@
 			name = ListCell;
 			sourceTree = "<group>";
 		};
+		1CEDE761147262220057E5D1 /* ViewPickerTool */ = {
+			isa = PBXGroup;
+			children = (
+				1CEDE75D147262170057E5D1 /* ViewPickerTool.h */,
+				1CEDE75E147262170057E5D1 /* ViewPickerTool.m */,
+			);
+			name = ViewPickerTool;
+			sourceTree = "<group>";
+		};
 		5D208126143E287F00D6B481 = {
 			isa = PBXGroup;
 			children = (
+				1CEDE761147262220057E5D1 /* ViewPickerTool */,
 				5D912C1F14673A58000BFEA4 /* FaceBook */,
 				1CC55AEF14652EA800F1012B /* FBLoginButton */,
 				1CC55AEA14652DFA00F1012B /* FBConnect */,
@@ -974,6 +987,7 @@
 				1CC55AE714652DF100F1012B /* SBJsonParser.m in Sources */,
 				1CC55AE814652DF100F1012B /* SBJsonWriter.m in Sources */,
 				1CC55AEE14652EA400F1012B /* FBLoginButton.m in Sources */,
+				1CEDE75F147262170057E5D1 /* ViewPickerTool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

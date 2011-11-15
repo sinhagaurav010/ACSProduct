@@ -33,19 +33,63 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+#pragma mark -Delegate viewToolPicker-
+-(void)pressDoneForSel:(NSString *)stringSel withindex:(NSInteger)indexRow
+{
+    pickerDis.hidden = YES;
+    
+    [self tableViewSettingWithRad:[[arrayDistanceFilter objectAtIndex:indexRow ]intValue]];
 
+}
+
+
+-(void)filterButtonClicked
+{
+    pickerDis.hidden = NO;
+}
 
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
+    UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] initWithTitle:@"Filter"
+                                                                    style:UIBarButtonItemStyleDone
+                                                                   target:self
+                                                                   action:@selector(filterButtonClicked)];
+    self.navigationItem.rightBarButtonItem = filterButton;
+    [filterButton release];
+
+    
+    NSArray *arrayDistance = [NSArray arrayWithObjects:@"0-50",@"0-100",@"0-150",@"0-200",@"0-250", nil];
+    arrayDistanceFilter = [[NSMutableArray alloc] initWithArray:[NSArray arrayWithObjects:@"6805",@"6600",@"6719",@"6720",@"250", nil]];
+    
+    NSMutableArray *arrayDis = [[NSMutableArray alloc] initWithArray:arrayDistance];
+    
+    pickerDis = [[ViewPickerTool alloc] initWithFrame:CGRectMake(0, 0, 320, 194)];
+    [self.view addSubview:pickerDis];
+    [pickerDis setClient:self];
+    pickerDis.hidden = YES;
+    [pickerDis addTheElement:arrayDis];
+    
     [self.navigationItem setTitle:TITLENEARBY];
     
+    [self tableViewSettingWithRad:100];
+   
+    [self.navigationController.navigationBar setTintColor:[UIColor blackColor] ];
+    
+    
+    
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+}
+
+-(void)tableViewSettingWithRad:(NSInteger)radius
+{
     arrayNearBy = [[NSMutableArray alloc] init];
     
     for(int i=0;i<[arrayAllData  count];i++)
     {
-        if((int)[ModalController  calDistancebetWithLat:[locationUser.strUserLat doubleValue] with:[locationUser.strUserLong doubleValue] with:[[[arrayAllData objectAtIndex:i ]objectForKey:@"Lat"]doubleValue] with:[[[arrayAllData objectAtIndex:i ]objectForKey:@"Long"]doubleValue]]<RADIUS)
+        if((int)[ModalController  calDistancebetWithLat:[locationUser.strUserLat doubleValue] with:[locationUser.strUserLong doubleValue] with:[[[arrayAllData objectAtIndex:i ]objectForKey:@"Lat"]doubleValue] with:[[[arrayAllData objectAtIndex:i ]objectForKey:@"Long"]doubleValue]]<radius)
         {
             [arrayNearBy addObject:[arrayAllData objectAtIndex:i]];
         }
@@ -64,14 +108,9 @@
         
         tableNearBy.delegate = self;
         tableNearBy.dataSource = self;
-        
+        [tableNearBy    reloadData];
     }
-    [self.navigationController.navigationBar setTintColor:[UIColor blackColor] ];
     
-    
-    
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
 }
 
 #pragma mark -tableview code-
@@ -101,7 +140,7 @@
 	 
 	 */
 	
-	ListCell *cell = (ListCell *)[tableView dequeueReusableCellWithIdentifier:@"ListCell"];
+	ListCell *cell = (ListCell *)[tableView dequeueReusableCellWithIdentifier:nil];
 	if (!cell) 
 	{
         NSLog(@"heres");

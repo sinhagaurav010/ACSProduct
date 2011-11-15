@@ -12,10 +12,15 @@
 #import "UserLocationFinder.h"
 #import "ListCell.h"
 #import "DetailsViewController.h"
-@interface NearByViewController : UIViewController<UITableViewDataSource,UITableViewDelegate> {
+#import "ViewPickerTool.h"
+
+@interface NearByViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,cutomDelegateToolPicker> {
+    NSMutableArray *arrayDistanceFilter;
+    ViewPickerTool *pickerDis;
     NSMutableArray *arrayNearBy;
     IBOutlet UITableView *tableNearBy;
     IBOutlet UILabel *lableNoNearBy;
 }
+-(void)tableViewSettingWithRad:(NSInteger)radius;
 
 @end
