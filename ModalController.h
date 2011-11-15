@@ -33,12 +33,13 @@
 //+(NSDate*) convertToSystemTimezone:(NSDate*)sourceDate ;
 //+(UIView*)titleView;
 
-+(double)calDistancebetWithLat:(double)latSource with:(double)longSource with:(double)latDis with:(double   )londDis;
++(NSString*)calDistancebetWithLat:(double)latSource with:(double)longSource with:(double)latDis with:(double   )londDis;
 @property(nonatomic,retain)    NSString *stringRx;
 @property(nonatomic,retain)    NSData *dataXml;
 @property (retain)	id <ModalDelegate> delegate;
 //+(void)parsingDataLarge:(NSString*)stringDataXml extractDataForKey:(NSMutableArray*)arrayKey;
 -(void)sendTheRequestWithPostString:(NSString*)string withURLString:(NSString*)URL;
 +(void)showTheAlertWithMsg:(NSString*)strMsg withTitle:(NSString*)strTitle inController:(UIViewController*)controller;
++(double )calDistancebetWithLatForDis:(double)latSource with:(double)longSource with:(double)latDis with:(double)londDis;
 
 @end

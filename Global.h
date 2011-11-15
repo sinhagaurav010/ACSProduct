@@ -92,11 +92,13 @@ BOOL isSaveToFav;
 #define DISTANCE_METER @"2"
 #define FONT [UIFont fontWithName:@"Helvetica"  size:14];
 
+#define CHANGEMEASUNIT @"MEASURINGUNOTCHANGED"
+
 NSMutableArray *arrayAllData;
 //////////
 BOOL KMselect;
 
-
+BOOL isChangeInMeasuringUnit;
 #define LINKMAPURL @"http://maps.google.com/maps?saddr=%@,%@&daddr=%@,%@"
 
 #define LINKMAPADD @"http://maps.google.com/maps?q=%@"

@@ -15,6 +15,7 @@
 @interface FavoritesViewController : UIViewController {
     IBOutlet UITableView *tableFav;
     NSMutableArray *arrayFavrites;
+    BOOL kmsel;
 }
 
 @end

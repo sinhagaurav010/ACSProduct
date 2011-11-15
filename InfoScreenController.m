@@ -125,7 +125,7 @@
 
 -(IBAction)mileSelectButtonClicked:(id)sender{
 	
-	 
+	[[NSNotificationCenter defaultCenter] postNotificationName:CHANGEMEASUNIT object:nil], 
 	 KMselect =FALSE;
 	// [KMSelectButton setBackgroundImage:[UIImage imageNamed:@"km.png"] forState:UIControlStateNormal];
 	 //[mileSelectButton setBackgroundImage:[UIImage imageNamed:@"mile_o.png"] forState:UIControlStateNormal];
@@ -142,6 +142,7 @@
 	 }
 	NSUserDefaults			*distance = [NSUserDefaults standardUserDefaults];
 	[distance setBool:KMselect forKey:@"DistanceParameterSelect"];
+    
 	[distance synchronize];
 	
 	

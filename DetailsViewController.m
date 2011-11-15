@@ -209,7 +209,6 @@
 {
     isSaveToFav = 1;
     NSMutableArray *arrayFav = [[NSMutableArray alloc] initWithArray:(NSMutableArray*)[ModalController getContforKey:SAVEFAV]];
-    NSLog(@"%@",arrayFav);
     [arrayFav addObject:dictInfo];
     [ModalController saveTheContent:arrayFav withKey:SAVEFAV];
     [arrayFav release];

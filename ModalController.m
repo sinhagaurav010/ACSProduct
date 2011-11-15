@@ -82,7 +82,7 @@
 //    return  0;
 //}
 
-+(double)calDistancebetWithLat:(double)latSource with:(double)longSource with:(double)latDis with:(double   )londDis
++(NSString *)calDistancebetWithLat:(double)latSource with:(double)longSource with:(double)latDis with:(double   )londDis
 {
 //    int nRadius = 6371; // Earth's radius in Kilometers
 //    // Get the difference between our two points
@@ -99,7 +99,35 @@
     CLLocation *poiLoc = [[CLLocation alloc] initWithLatitude:latDis longitude:londDis];
 	
     double dist = [userLoc getDistanceFrom:poiLoc] / 1000;
-    return dist; // Return our calculated distance
+    
+    if(KMselect == TRUE)
+    return [NSString stringWithFormat:@"%.3fKm",dist]; // Return our calculated distance
+    else
+        return [NSString stringWithFormat:@"%.3fMiles",dist*.62];
+}
+
++(double )calDistancebetWithLatForDis:(double)latSource with:(double)longSource with:(double)latDis with:(double   )londDis
+{
+    //    int nRadius = 6371; // Earth's radius in Kilometers
+    //    // Get the difference between our two points
+    //    // then convert the difference into radians
+    //    double nDLat = (latDis - latSource) * (M_PI/180);
+    //    double nDLon = (londDis - longSource) * (M_PI/180);
+    //    double nA = pow ( sin(nDLat/2), 2 ) + cos(latSource) * cos(latDis) * pow ( sin(nDLon/2), 2 );
+    //    
+    //    double nC = 2 * atan2( sqrt(nA), sqrt( 1 - nA ));
+    //    double nD = nRadius * nC;
+    //    NSLog(@"%f",nD);
+    
+    CLLocation *userLoc = [[CLLocation alloc]initWithLatitude:latSource  longitude:longSource];
+    CLLocation *poiLoc = [[CLLocation alloc] initWithLatitude:latDis longitude:londDis];
+	
+    double dist = [userLoc getDistanceFrom:poiLoc] / 1000;
+    
+    if(KMselect == TRUE)
+        return dist; // Return our calculated distance
+    else
+        return dist*.62;
 }
 #pragma mark -delegate-
 

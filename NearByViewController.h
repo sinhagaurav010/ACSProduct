@@ -21,6 +21,7 @@
     NSMutableArray *arrayDistanceFilter;
     ViewPickerTool *pickerDis;
     IBOutlet UITableView *tableNearBy;
+    BOOL kmsel;
     IBOutlet UILabel *lableNoNearBy;
 }
 -(void)tableViewSettingWithRad:(NSInteger)radius;

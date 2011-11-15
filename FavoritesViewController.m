@@ -26,7 +26,17 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
-   }
+    if(kmsel == 0 && KMselect != 0)
+    {
+        [tableFav reloadData];
+        kmsel = 1;
+    }
+    else if(kmsel == 1 && KMselect !=1 )
+    {
+        [tableFav reloadData];
+        kmsel = 0;
+    }
+}
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -60,10 +70,17 @@ if(isSaveToFav == 1)
     self.navigationItem.rightBarButtonItem =BARBUTTON(@"Edit", @selector(edit));    
 }
 
+-(void)reloadData:(NSNotificationCenter*)notification
+{
+    [tableFav   reloadData];
+}
 #pragma mark - View lifecycle
+
 
 - (void)viewDidLoad
 {
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:CHANGEMEASUNIT object:nil];
+    
     [self.navigationController.navigationBar setTintColor:[UIColor blackColor] ];
 
     arrayFavrites = [[NSMutableArray alloc] initWithArray:[ModalController getContforKey:SAVEFAV]];
@@ -128,7 +145,7 @@ if(isSaveToFav == 1)
         cell.costLabel.text = [NSString stringWithFormat:@"$%@",[[arrayFavrites objectAtIndex:indexPath.row] objectForKey:FIELDCOST]];
         cell.venueNameLabel.text = [[arrayFavrites objectAtIndex:indexPath.row] objectForKey:FIELDNAME];
         cell.dealLabel.text = [[arrayFavrites objectAtIndex:indexPath.row] objectForKey:FIELDDEAL];
-        cell.distanceLabel.text = [NSString stringWithFormat:@"%0.3fKm",[ModalController  calDistancebetWithLat:LATSOURCE with:LONGSOURCE with:[[[arrayFavrites objectAtIndex:indexPath.row ]objectForKey:@"Lat"]doubleValue] with:[[[arrayFavrites objectAtIndex:indexPath.row ]objectForKey:@"Long"]doubleValue]]];
+        cell.distanceLabel.text = [NSString stringWithFormat:@"%@",[ModalController  calDistancebetWithLat:LATSOURCE with:LONGSOURCE with:[[[arrayFavrites objectAtIndex:indexPath.row ]objectForKey:@"Lat"]doubleValue] with:[[[arrayFavrites objectAtIndex:indexPath.row ]objectForKey:@"Long"]doubleValue]]];
         
         cell.imageMain.backgroundColor = [UIColor clearColor];
         cell.imageMain.imageURL = [NSURL URLWithString:[[[[arrayFavrites objectAtIndex:indexPath.row]objectForKey:FIELDIMAGES]objectForKey:FIELDIMAGE]objectAtIndex:0]] ;

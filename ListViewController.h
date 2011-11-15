@@ -14,10 +14,12 @@
 #import "ModalController.h"
 #import "UserLocationFinder.h"
 #import "CustomTableCell.h"
+
 @interface ListViewController : UIViewController {
     IBOutlet UITableView *tableList;
     NSMutableArray *arrayList;
     NSMutableArray *arrayImages;
+    BOOL kmsel;
 }
 @property(nonatomic,retain)    MultipleDownload   *downloads;
 @property(nonatomic,retain)    NSMutableArray   *urls;

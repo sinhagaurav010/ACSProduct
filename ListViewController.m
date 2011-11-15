@@ -61,11 +61,28 @@
     
     // Release any cached data, images, etc that aren't in use.
 }
-
+-(void)reloadData:(NSNotificationCenter*)notification
+{
+    [tableList   reloadData];
+}
 #pragma mark - View lifecycle
-
+- (void)viewWillAppear:(BOOL)animated
+{
+if(kmsel == 0 && KMselect != 0)
+{
+    [tableList reloadData];
+    kmsel = 1;
+}
+    else if(kmsel == 1 && KMselect !=1 )
+    {
+        [tableList reloadData];
+        kmsel = 0;
+    }
+}
 - (void)viewDidLoad
 {
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:CHANGEMEASUNIT object:nil];
+
     [self.navigationController.navigationBar setTintColor:[UIColor blackColor] ];
 
     if(self.isFromHome != 1)
@@ -158,7 +175,9 @@
     
 	[cell settitlestr:[[arrayList objectAtIndex:indexPath.row] objectForKey:FIELDNAME]];
     [cell setCostLabelstr:[NSString stringWithFormat:@"$%@",[[arrayList objectAtIndex:indexPath.row] objectForKey:FIELDCOST]]];
-    [cell setDistanceLabelstr:[NSString stringWithFormat:@"%.3fKm",[ModalController  calDistancebetWithLat:[locationUser.strUserLat doubleValue] with:[locationUser.strUserLong doubleValue] with:[[[arrayList objectAtIndex:indexPath.row ]objectForKey:@"Lat"]doubleValue] with:[[[arrayList objectAtIndex:indexPath.row ]objectForKey:@"Long"]doubleValue]]]];
+    
+    
+    [cell setDistanceLabelstr:[NSString stringWithFormat:@"%@",[ModalController  calDistancebetWithLat:[locationUser.strUserLat doubleValue] with:[locationUser.strUserLong doubleValue] with:[[[arrayList objectAtIndex:indexPath.row ]objectForKey:@"Lat"]doubleValue] with:[[[arrayList objectAtIndex:indexPath.row ]objectForKey:@"Long"]doubleValue]]]];
     [cell setDealLabelstr:[[arrayList objectAtIndex:indexPath.row] objectForKey:FIELDDEAL]];
     [cell setPhotoFromUrl:[[[[arrayList objectAtIndex:indexPath.row]objectForKey:FIELDIMAGES]objectForKey:FIELDIMAGE]objectAtIndex:0]];
 

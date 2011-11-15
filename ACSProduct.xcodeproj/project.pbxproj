@@ -526,10 +526,7 @@
 				5D381B2F144104A7001A90DE /* ListViewController */,
 				5DC47137143FB4A200DE5380 /* ImagesACS */,
 				5DC470DB143F99D600DE5380 /* MessageUI.framework */,
-				5DC470D8143F997600DE5380 /* TagParser.h */,
-				5DC470D9143F997600DE5380 /* TagParser.m */,
-				5DC470D4143F995400DE5380 /* CategoryParser.h */,
-				5DC470D5143F995400DE5380 /* CategoryParser.m */,
+				5D38E78A1472F8E100C88B24 /* ParserCode */,
 				5D20817A143E61E500D6B481 /* InfoScreenController */,
 				5D381B42144106DD001A90DE /* Global */,
 				5D208174143E61C700D6B481 /* HomePageCell */,
@@ -696,6 +693,17 @@
 				5D20816E143E5DD400D6B481 /* Global.h */,
 			);
 			name = Global;
+			sourceTree = "<group>";
+		};
+		5D38E78A1472F8E100C88B24 /* ParserCode */ = {
+			isa = PBXGroup;
+			children = (
+				5DC470D8143F997600DE5380 /* TagParser.h */,
+				5DC470D9143F997600DE5380 /* TagParser.m */,
+				5DC470D4143F995400DE5380 /* CategoryParser.h */,
+				5DC470D5143F995400DE5380 /* CategoryParser.m */,
+			);
+			name = ParserCode;
 			sourceTree = "<group>";
 		};
 		5D3B3426144AF22D006C8DEA /* ScrollViewImages */ = {

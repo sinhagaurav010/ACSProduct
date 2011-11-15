@@ -78,11 +78,31 @@
 {
     pickerDis.hidden = NO;
 }
+-(void)reloadData:(NSNotificationCenter*)notification
+{
+    [tableNearBy   reloadData];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    if(kmsel == 0 && KMselect != 0)
+    {
+        [tableNearBy    reloadData];
+        kmsel = 1;
+    }
+    else if(kmsel == 1 && KMselect !=1 )
+    {
+        [tableNearBy reloadData];
+        kmsel = 0;
+    }
+}
 
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:CHANGEMEASUNIT object:nil];
+
     UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] initWithTitle:@"Filter"
                                                                     style:UIBarButtonItemStyleDone
                                                                    target:self
@@ -121,10 +141,12 @@
     
     for(int i=0;i<[arrayAllData  count];i++)
     {
-        if((int)[ModalController  calDistancebetWithLat:[locationUser.strUserLat doubleValue] with:[locationUser.strUserLong doubleValue] with:[[[arrayAllData objectAtIndex:i ]objectForKey:@"Lat"]doubleValue] with:[[[arrayAllData objectAtIndex:i ]objectForKey:@"Long"]doubleValue]]<radius)
+        if((int)[ModalController calDistancebetWithLatForDis:[locationUser.strUserLat doubleValue] with:[locationUser.strUserLong doubleValue] with:[[[arrayAllData objectAtIndex:i ]objectForKey:@"Lat"]doubleValue] with:[[[arrayAllData objectAtIndex:i ]objectForKey:@"Long"]doubleValue]]<radius)
         {
             [arrayNearBy addObject:[arrayAllData objectAtIndex:i]];
         }
+        
+         
     }
     NSLog(@"---------%@",arrayNearBy);
     
@@ -215,7 +237,7 @@
     
 	[cell settitlestr:[[arrayNearBy objectAtIndex:indexPath.row] objectForKey:FIELDNAME]];
     [cell setCostLabelstr:[NSString stringWithFormat:@"$%@",[[arrayNearBy objectAtIndex:indexPath.row] objectForKey:FIELDCOST]]];
-    [cell setDistanceLabelstr:[NSString stringWithFormat:@"%.3fKm",[ModalController  calDistancebetWithLat:[locationUser.strUserLat doubleValue] with:[locationUser.strUserLong doubleValue] with:[[[arrayNearBy objectAtIndex:indexPath.row ]objectForKey:@"Lat"]doubleValue] with:[[[arrayNearBy objectAtIndex:indexPath.row ]objectForKey:@"Long"]doubleValue]]]];
+    [cell setDistanceLabelstr:[NSString stringWithFormat:@"%@",[ModalController  calDistancebetWithLat:[locationUser.strUserLat doubleValue] with:[locationUser.strUserLong doubleValue] with:[[[arrayNearBy objectAtIndex:indexPath.row ]objectForKey:@"Lat"]doubleValue] with:[[[arrayNearBy objectAtIndex:indexPath.row ]objectForKey:@"Long"]doubleValue]]]];
     [cell setDealLabelstr:[[arrayNearBy objectAtIndex:indexPath.row] objectForKey:FIELDDEAL]];
     [cell setPhotoFromUrl:[[[[arrayNearBy objectAtIndex:indexPath.row]objectForKey:FIELDIMAGES]objectForKey:FIELDIMAGE]objectAtIndex:0]];
     
