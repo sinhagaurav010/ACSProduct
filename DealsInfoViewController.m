@@ -59,7 +59,6 @@
     [viewForWebView.layer setMasksToBounds:YES];
     viewForWebView.backgroundColor = [UIColor clearColor];
     
-    
     webViewInfo.backgroundColor = [UIColor clearColor];
     labelExp.text = [dictDealInfo objectForKey:FIELDDEALEXP];
     labelCost.text = [NSString stringWithFormat:@"%@€",[dictDealInfo  objectForKey:FIELDCOST]];

@@ -96,7 +96,7 @@
 - (void)setPhotoFromUrl:(NSString*)flickrPhoto
 {
     [self.imageViewM setImageWithURL:[NSURL URLWithString:flickrPhoto]
-                   placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+                   placeholderImage:[UIImage imageNamed:@"placeholder.jpg"]];
 }
 
 -(void)setDealLabelstr:(NSString *)stringTitle

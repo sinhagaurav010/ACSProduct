@@ -12,6 +12,8 @@
 		1C889237144C5ABE00CC9D2C /* EGOImageLoadConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C889231144C5ABE00CC9D2C /* EGOImageLoadConnection.m */; };
 		1C889238144C5ABE00CC9D2C /* EGOImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C889232144C5ABE00CC9D2C /* EGOImageButton.m */; };
 		1C889239144C5ABE00CC9D2C /* EGOImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C889234144C5ABE00CC9D2C /* EGOImageView.m */; };
+		1CB2AF951473A985000C8539 /* ACSData.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1CB2AF941473A985000C8539 /* ACSData.xml */; };
+		1CB2AF9D1473B5E9000C8539 /* placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1CB2AF9C1473B5E9000C8539 /* placeholder.jpg */; };
 		1CC55ADE14652DF100F1012B /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC55AC814652DF100F1012B /* Facebook.m */; };
 		1CC55ADF14652DF100F1012B /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1CC55ACA14652DF100F1012B /* FBDialog.bundle */; };
 		1CC55AE014652DF100F1012B /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CC55ACC14652DF100F1012B /* FBDialog.m */; };
@@ -164,6 +166,8 @@
 		1C889232144C5ABE00CC9D2C /* EGOImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageButton.m; sourceTree = "<group>"; };
 		1C889233144C5ABE00CC9D2C /* EGOImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOImageView.h; sourceTree = "<group>"; };
 		1C889234144C5ABE00CC9D2C /* EGOImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOImageView.m; sourceTree = "<group>"; };
+		1CB2AF941473A985000C8539 /* ACSData.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ACSData.xml; sourceTree = "<group>"; };
+		1CB2AF9C1473B5E9000C8539 /* placeholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = placeholder.jpg; sourceTree = "<group>"; };
 		1CC55AC614652DF100F1012B /* facebook_ios_sdk_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = facebook_ios_sdk_Prefix.pch; sourceTree = "<group>"; };
 		1CC55AC714652DF100F1012B /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
 		1CC55AC814652DF100F1012B /* Facebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Facebook.m; sourceTree = "<group>"; };
@@ -396,6 +400,14 @@
 			name = EGOImageView;
 			sourceTree = "<group>";
 		};
+		1CB2AF971473A989000C8539 /* ACSData */ = {
+			isa = PBXGroup;
+			children = (
+				1CB2AF941473A985000C8539 /* ACSData.xml */,
+			);
+			name = ACSData;
+			sourceTree = "<group>";
+		};
 		1CC55AEA14652DFA00F1012B /* FBConnect */ = {
 			isa = PBXGroup;
 			children = (
@@ -499,6 +511,7 @@
 		5D208126143E287F00D6B481 = {
 			isa = PBXGroup;
 			children = (
+				1CB2AF971473A989000C8539 /* ACSData */,
 				1CEDE77F1472AF600057E5D1 /* SBWebImage */,
 				1CEDE765147295760057E5D1 /* CustomTableCell */,
 				1CEDE761147262220057E5D1 /* ViewPickerTool */,
@@ -766,6 +779,7 @@
 		5DC47137143FB4A200DE5380 /* ImagesACS */ = {
 			isa = PBXGroup;
 			children = (
+				1CB2AF9C1473B5E9000C8539 /* placeholder.jpg */,
 				5DAA5EF0144B865D0019093E /* comman.png */,
 				5DB371D8145C77C800C97091 /* facebook_button.png */,
 				5DB371D9145C77C800C97091 /* emailButton.png */,
@@ -1007,6 +1021,8 @@
 				1CC55ADF14652DF100F1012B /* FBDialog.bundle in Resources */,
 				5D912C1E14673A43000BFEA4 /* LogoutNormal.png in Resources */,
 				5D912C2114673AE6000BFEA4 /* LoginNormal.png in Resources */,
+				1CB2AF951473A985000C8539 /* ACSData.xml in Resources */,
+				1CB2AF9D1473B5E9000C8539 /* placeholder.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1107,8 +1123,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				PROVISIONING_PROFILE = "DCA5F447-3F00-44B3-A95D-D7F1115661A5";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DCA5F447-3F00-44B3-A95D-D7F1115661A5";
+				PROVISIONING_PROFILE = "035282A9-9D36-4FF4-95D7-C575AD72158C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "035282A9-9D36-4FF4-95D7-C575AD72158C";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1125,8 +1141,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "DCA5F447-3F00-44B3-A95D-D7F1115661A5";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DCA5F447-3F00-44B3-A95D-D7F1115661A5";
+				PROVISIONING_PROFILE = "035282A9-9D36-4FF4-95D7-C575AD72158C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "035282A9-9D36-4FF4-95D7-C575AD72158C";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

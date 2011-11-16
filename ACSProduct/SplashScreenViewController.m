@@ -41,6 +41,8 @@
     // [self.navigationController pushViewController:tabBarController
     //                   animated:YES];
     
+    isInternetConnect = 0;
+    
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view
                                               animated:YES];
     hud.labelText = @"Loading...";
@@ -54,11 +56,10 @@
     
     // Do any additional setup after loading the view from its nib.
 }
--(void)getdata
+
+-(void)parseData:(NSData*)dataXML
 {
-    NSLog(@"ksdvfv%@",modal.stringRx);
-    NSDictionary *_xmlDictionaryData = [[XMLReader dictionaryForXMLData:modal.
-                                         dataXml error:nil] retain];
+    NSDictionary *_xmlDictionaryData = [[XMLReader dictionaryForXMLData:dataXML error:nil] retain];
     NSLog(@"%@",_xmlDictionaryData);
     [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
     
@@ -85,15 +86,29 @@
             [arrayNearBy addObject:[arrayAllData objectAtIndex:i]];
         }
     }
+
+}
+-(void)getdata
+{
+    NSLog(@"ksdvfv%@",modal.stringRx);
+    [self parseData:modal.dataXml];
 }
 
 -(void)getError
 {
+    isInternetConnect = 1;
+    
     [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
     
-    [ModalController showTheAlertWithMsg:@"Error" 
-                               withTitle:@"Error in Network"
-                            inController:self];
+    NSString *filePath	= [[NSBundle mainBundle]pathForResource:@"ACSData" ofType:@"xml"];
+	NSString *fileContents= [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+    //NSLog(@"filecontents=%@",fileContents);
+	NSData  *comicVideoXmlfileData= [fileContents dataUsingEncoding:NSUTF8StringEncoding];
+    
+    [self parseData:comicVideoXmlfileData];
+//    [ModalController showTheAlertWithMsg:@"Error" 
+//                               withTitle:@"Error in Network"
+//                            inController:self];
 }
 - (void)viewDidUnload
 {
