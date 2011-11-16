@@ -16,6 +16,9 @@
    IBOutlet UITabBarController *tabBarController;
     ModalController *modal;
 }
+
+-(IBAction)fromLocalDataBase:(id)sender;
+-(IBAction)fromServer:(id)sender;
 -(void)parseData:(NSData*)dataXML;
 
 @end
