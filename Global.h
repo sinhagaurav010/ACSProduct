@@ -5,7 +5,20 @@
 //  Created by Gaurav Sinha on 27/07/10.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
+
+//1 cat 0 feat  catInd PUB	
+//
+
+/*string Lat = Request.Form["Latitude"].ToString();
+string Long = Request.Form["Longitude"].ToString();
+string ProximityDistance = Request.Form["Distance"].ToString();
+string CategoryId = Request.Form["Category"].ToString().Trim();
+string CatInd = Request.Form["CatInd"].ToString().Trim();
+ */
+
 #import "UserLocationFinder.h"
+
+#define BASEURL @"http://sanganan.com/backofficeservice.aspx"
 
 #define TESTING 1
 #define TITLEFAV @"Favourites"

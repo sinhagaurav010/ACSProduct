@@ -65,11 +65,6 @@
     [self.navigationController.navigationBar setTintColor:[UIColor blackColor] ];
 
     [self.navigationItem setTitle:MAPTITLE];
-    
-    
-   
-
-    
     //[self functionToCheckLat:arrayMapContent]];
 
    

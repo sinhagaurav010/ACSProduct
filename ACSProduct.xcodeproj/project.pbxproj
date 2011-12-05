@@ -543,7 +543,7 @@
 				5D20817A143E61E500D6B481 /* InfoScreenController */,
 				5D381B42144106DD001A90DE /* Global */,
 				5D208174143E61C700D6B481 /* HomePageCell */,
-				5D20816D143E5DBB00D6B481 /* HomePage */,
+				5D20816D143E5DBB00D6B481 /* HomePageController */,
 				5D208166143E5D9300D6B481 /* libsqlite3.0.dylib */,
 				5D208163143E5D4B00D6B481 /* DataBaseHandler */,
 				5D208154143E2BF600D6B481 /* SplashScreenViewController */,
@@ -612,14 +612,14 @@
 			name = DataBaseHandler;
 			sourceTree = "<group>";
 		};
-		5D20816D143E5DBB00D6B481 /* HomePage */ = {
+		5D20816D143E5DBB00D6B481 /* HomePageController */ = {
 			isa = PBXGroup;
 			children = (
 				5D208168143E5DB400D6B481 /* HomePageController.h */,
 				5D208169143E5DB400D6B481 /* HomePageController.m */,
 				5D20816A143E5DB400D6B481 /* HomePageController.xib */,
 			);
-			name = HomePage;
+			name = HomePageController;
 			sourceTree = "<group>";
 		};
 		5D208174143E61C700D6B481 /* HomePageCell */ = {

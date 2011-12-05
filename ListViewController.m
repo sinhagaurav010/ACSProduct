@@ -25,8 +25,11 @@
     //for(int i=0;i<[arrayImages count];i++)
     //{
     NSLog(@"imageget");
+    
     UIImageView *viewImage = [arrayImages objectAtIndex:[idx intValue]];
     viewImage.image = [UIImage imageWithData:[downloads dataAtIndex:[idx intValue]]];
+    
+    
     //}
     //    if([idx intValue]==0)
     //    {
