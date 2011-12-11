@@ -254,6 +254,7 @@
 }
 #pragma mark -
 #pragma mark - UITableView delegates
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     NSLog(@"%d",[arrayInfo count]);
 	// The number of sections is based on the number of items in the data property list.

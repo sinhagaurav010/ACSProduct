@@ -14,8 +14,12 @@
 #import "ModalController.h"
 #import "UserLocationFinder.h"
 #import "CustomTableCell.h"
+#import "ASIHTTPRequest.h"
+#import "ASIFormDataRequest.h"
+#import "MBProgressHUD.h"
+#import "XMLReader.h"
 
-@interface ListViewController : UIViewController {
+@interface ListViewController : UIViewController<ASIHTTPRequestDelegate> {
     IBOutlet UITableView *tableList;
     NSMutableArray *arrayList;
     NSMutableArray *arrayImages;

@@ -127,8 +127,10 @@
 }
 #pragma mark -
 #pragma mark <Button Click Events>
--(IBAction)categoryButtonClicked:(id)sender{
+-(IBAction)categoryButtonClicked:(id)sender
+{
 	self.strListType = TYPECAT;
+    
 	WhichButtonClicked = 0;
 	
 	featureImage.alpha = 0.5;
@@ -263,7 +265,7 @@
     }
     
     ListViewController *ListController = [[ListViewController alloc] init];
-    ListController.arrayList = [[NSMutableArray alloc] initWithArray:arrayFilter];
+    //ListController.arrayList = [[NSMutableArray alloc] initWithArray:arrayFilter];
     ListController.stringTitle = [[commnArray objectAtIndex:indexPath.row]objectForKey:@"name"];
     ListController.isFromHome = 1;
     [self.navigationController pushViewController:ListController animated:YES];

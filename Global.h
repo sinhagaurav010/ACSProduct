@@ -20,6 +20,14 @@ string CatInd = Request.Form["CatInd"].ToString().Trim();
 
 #define BASEURL @"http://sanganan.com/backofficeservice.aspx"
 
+
+#define BASELAT @"Latitude"
+#define BASELONG @"Longitude"
+#define BASEDIS @"Distance"
+#define BASECAT @"Category"
+#define BASEIND @"CatInd"
+
+
 #define TESTING 1
 #define TITLEFAV @"Favourites"
 #define TITLENEARBY @"NearBy"

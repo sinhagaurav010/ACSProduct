@@ -88,26 +88,43 @@ if(kmsel == 0 && KMselect != 0)
 
     [self.navigationController.navigationBar setTintColor:[UIColor blackColor] ];
 
-    if(self.isFromHome != 1)
-    {
-        self.stringTitle = TITTLELIST;
-        arrayList = [[NSMutableArray alloc] initWithArray:arrayAllData];
-    }
+//    if(self.isFromHome != 1)
+//    {
+//        self.stringTitle = TITTLELIST;
+//        arrayList = [[NSMutableArray alloc] initWithArray:arrayAllData];
+//    }
+//    
+    
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:BASEURL]];
+    
+    [request setRequestMethod:@"POST"];
+    [request setPostValue:locationUser.strUserLat forKey:BASELAT];
+    [request setPostValue:locationUser.strUserLong forKey:BASELONG];
+    [request setPostValue:@"12173" forKey:BASEDIS];
+    [request setPostValue:@"" forKey:BASEIND];
+    [request setPostValue:@"" forKey:BASECAT];
+    [request setDelegate:self];
+
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    hud.labelText = @"Loading...";
+    
+    [request startAsynchronous];
+
     
     [self.navigationItem setTitle:stringTitle];
     
-    self.urls = [[NSMutableArray alloc]init];
-    arrayImages = [[NSMutableArray alloc] init];
-    for(int i=0;i<[arrayList count];i++)
-    {
-        UIImageView *imageViewList = [[UIImageView alloc] initWithFrame:CGRectMake(0,
-                                                                                   1,
-                                                                                   55,
-                                                                                   43)];
-        [arrayImages addObject:imageViewList];
-         [self.urls addObject:[[[[arrayList objectAtIndex:i]objectForKey:FIELDIMAGES]objectForKey:FIELDIMAGE]objectAtIndex:0]];
-    }
-    
+//    self.urls = [[NSMutableArray alloc]init];
+//    arrayImages = [[NSMutableArray alloc] init];
+//    for(int i=0;i<[arrayList count];i++)
+//    {
+//        UIImageView *imageViewList = [[UIImageView alloc] initWithFrame:CGRectMake(0,
+//                                                                                   1,
+//                                                                                   55,
+//                                                                                   43)];
+//        [arrayImages addObject:imageViewList];
+//         [self.urls addObject:[[[[arrayList objectAtIndex:i]objectForKey:FIELDIMAGES]objectForKey:FIELDIMAGE]objectAtIndex:0]];
+//    }
+//    
     
 //    self.downloads = [[MultipleDownload alloc] initWithUrls: urls];
 //    self.downloads.delegate = self;
@@ -116,6 +133,36 @@ if(kmsel == 0 && KMselect != 0)
     [super viewDidLoad];
     
     // Do any additional setup after loading the view from its nib.
+}
+
+- (void)requestFinished:(ASIHTTPRequest *)request
+{
+    [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+    NSLog(@"I have got data------->>>>>%@",[request responseString]);
+    
+    NSDictionary *_xmlDictionaryData = [[XMLReader dictionaryForXMLData:[request responseData] error:nil] retain];
+    NSLog(@"%@",_xmlDictionaryData);
+    
+    if([[_xmlDictionaryData objectForKey:@"Lists"] objectForKey:@"List"])
+    {
+        if([[[_xmlDictionaryData objectForKey:@"Lists"] objectForKey:@"List"] isKindOfClass:[NSArray class]])
+            arrayList  = [[NSMutableArray alloc] initWithArray:[[_xmlDictionaryData objectForKey:@"Lists"] objectForKey:@"List"]];
+        
+        else
+        {
+            arrayList = [[NSMutableArray alloc] init];
+            [arrayList addObject:[[_xmlDictionaryData objectForKey:@"Lists"] objectForKey:@"List"]];
+        }
+    }
+    
+    [tableList reloadData];
+}
+
+
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+    [ModalController showTheAlertWithMsg:@"Error in network" withTitle:@"Failed" inController:self];        
+        
 }
 
 #pragma mark -
