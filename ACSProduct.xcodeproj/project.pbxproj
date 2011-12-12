@@ -89,6 +89,8 @@
 		5D436704144B4F34005A86C5 /* DealsInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D436702144B4F34005A86C5 /* DealsInfoViewController.m */; };
 		5D436705144B4F34005A86C5 /* DealsInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D436703144B4F34005A86C5 /* DealsInfoViewController.xib */; };
 		5D4A6083145216EC00718B57 /* UserLocationFinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D4A6082145216EC00718B57 /* UserLocationFinder.m */; };
+		5D56F9EE14969FDF00B9D56F /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D56F9EC14969FDF00B9D56F /* SettingViewController.m */; };
+		5D56F9EF14969FDF00B9D56F /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D56F9ED14969FDF00B9D56F /* SettingViewController.xib */; };
 		5D912C1E14673A43000BFEA4 /* LogoutNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D912C1D14673A43000BFEA4 /* LogoutNormal.png */; };
 		5D912C2114673AE6000BFEA4 /* LoginNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D912C2014673AE6000BFEA4 /* LoginNormal.png */; };
 		5DAA5EEE144B824C0019093E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DAA5EED144B824C0019093E /* CoreLocation.framework */; };
@@ -317,6 +319,9 @@
 		5D436703144B4F34005A86C5 /* DealsInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DealsInfoViewController.xib; sourceTree = "<group>"; };
 		5D4A6081145216EC00718B57 /* UserLocationFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLocationFinder.h; sourceTree = "<group>"; };
 		5D4A6082145216EC00718B57 /* UserLocationFinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLocationFinder.m; sourceTree = "<group>"; };
+		5D56F9EB14969FDF00B9D56F /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingViewController.h; path = /Users/preetdhillon/ACSProduct/SettingViewController.h; sourceTree = "<absolute>"; };
+		5D56F9EC14969FDF00B9D56F /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingViewController.m; path = /Users/preetdhillon/ACSProduct/SettingViewController.m; sourceTree = "<absolute>"; };
+		5D56F9ED14969FDF00B9D56F /* SettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingViewController.xib; path = /Users/preetdhillon/ACSProduct/SettingViewController.xib; sourceTree = "<absolute>"; };
 		5D912C1D14673A43000BFEA4 /* LogoutNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogoutNormal.png; sourceTree = "<group>"; };
 		5D912C2014673AE6000BFEA4 /* LoginNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginNormal.png; sourceTree = "<group>"; };
 		5DAA5EED144B824C0019093E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -596,11 +601,8 @@
 		5D208126143E287F00D6B481 = {
 			isa = PBXGroup;
 			children = (
-				5DD3C51114940939007835B1 /* SystemConfiguration.framework */,
-				5DD3C50F14940925007835B1 /* MobileCoreServices.framework */,
-				5DD3C50514940621007835B1 /* libz.dylib */,
-				5DD3C50314940618007835B1 /* libxml2.dylib */,
-				5DD3C501149405F9007835B1 /* CFNetwork.framework */,
+				5D56F9F114969FF000B9D56F /* SettingViewController */,
+				5D56F9F21496A00600B9D56F /* FrameworkExtra */,
 				5DD3C4FD149405BB007835B1 /* ASIHTTP */,
 				1CB2AF971473A989000C8539 /* ACSData */,
 				1CEDE77F1472AF600057E5D1 /* SBWebImage */,
@@ -611,11 +613,9 @@
 				1CC55AEA14652DFA00F1012B /* FBConnect */,
 				1CC55AEB14652E0600F1012B /* JSON */,
 				5D4A60851452170300718B57 /* UserLocationFinder */,
-				5DC781DC144CD11D00F146C9 /* MapKit.framework */,
 				5DC781D7144CC11400F146C9 /* CustomMap */,
 				1C88923A144C5ACC00CC9D2C /* EGOImageView */,
 				5DAA5EFB144B90BB0019093E /* SlidesShow */,
-				5DAA5EED144B824C0019093E /* CoreLocation.framework */,
 				5D436707144B4F3D005A86C5 /* DealsInfoViewController */,
 				5D3B3430144AF3A3006C8DEA /* DetailsViewContrioller */,
 				5D3B3426144AF22D006C8DEA /* ScrollViewImages */,
@@ -846,6 +846,30 @@
 				5D4A6082145216EC00718B57 /* UserLocationFinder.m */,
 			);
 			name = UserLocationFinder;
+			sourceTree = "<group>";
+		};
+		5D56F9F114969FF000B9D56F /* SettingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5D56F9EB14969FDF00B9D56F /* SettingViewController.h */,
+				5D56F9EC14969FDF00B9D56F /* SettingViewController.m */,
+				5D56F9ED14969FDF00B9D56F /* SettingViewController.xib */,
+			);
+			name = SettingViewController;
+			sourceTree = "<group>";
+		};
+		5D56F9F21496A00600B9D56F /* FrameworkExtra */ = {
+			isa = PBXGroup;
+			children = (
+				5DD3C51114940939007835B1 /* SystemConfiguration.framework */,
+				5DD3C50F14940925007835B1 /* MobileCoreServices.framework */,
+				5DD3C50514940621007835B1 /* libz.dylib */,
+				5DD3C50314940618007835B1 /* libxml2.dylib */,
+				5DD3C501149405F9007835B1 /* CFNetwork.framework */,
+				5DC781DC144CD11D00F146C9 /* MapKit.framework */,
+				5DAA5EED144B824C0019093E /* CoreLocation.framework */,
+			);
+			name = FrameworkExtra;
 			sourceTree = "<group>";
 		};
 		5D912C1F14673A58000BFEA4 /* FaceBook */ = {
@@ -1169,6 +1193,7 @@
 				5D912C2114673AE6000BFEA4 /* LoginNormal.png in Resources */,
 				1CB2AF951473A985000C8539 /* ACSData.xml in Resources */,
 				1CB2AF9D1473B5E9000C8539 /* placeholder.jpg in Resources */,
+				5D56F9EF14969FDF00B9D56F /* SettingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1252,6 +1277,7 @@
 				5DD3C4FB14940598007835B1 /* ASICloudFilesObjectRequest.m in Sources */,
 				5DD3C4FC14940598007835B1 /* ASICloudFilesRequest.m in Sources */,
 				5DD3C500149405D2007835B1 /* Reachability.m in Sources */,
+				5D56F9EE14969FDF00B9D56F /* SettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

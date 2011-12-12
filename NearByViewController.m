@@ -69,7 +69,7 @@
 -(void)pressDoneForSel:(NSString *)stringSel withindex:(NSInteger)indexRow
 {
     pickerDis.hidden = YES;
-    
+    NSLog(@"----[[arrayDistanceFilter objectAtIndex:indexRow ]intValue]--------%d",[[arrayDistanceFilter objectAtIndex:indexRow ]intValue]);
     [self tableViewSettingWithRad:[[arrayDistanceFilter objectAtIndex:indexRow ]intValue]];
 
 }
@@ -137,19 +137,48 @@
 
 -(void)tableViewSettingWithRad:(NSInteger)radius
 {
+
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:BASEURL]];
+    
+    [request setRequestMethod:@"POST"];
+    [request setPostValue:locationUser.strUserLat forKey:BASELAT];
+    [request setPostValue:locationUser.strUserLong forKey:BASELONG];
+    [request setPostValue:[NSString stringWithFormat:@"%d",radius] forKey:BASEDIS];
+    [request setPostValue:@"" forKey:BASEIND];
+    [request setPostValue:@"" forKey:BASECAT];
+    [request setDelegate:self];
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    hud.labelText = @"Loading...";
+    
+    [request startAsynchronous];
+
+}
+
+#define mark -ASIHTTP request delegates-
+- (void)requestFinished:(ASIHTTPRequest *)request
+{
+    [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+    NSLog(@"I have got data------->>>>>%@",[request responseString]);
+    
+    NSDictionary *_xmlDictionaryData = [[XMLReader dictionaryForXMLData:[request responseData] error:nil] retain];
+    NSLog(@"%@",_xmlDictionaryData);
     
     arrayNearBy = [[NSMutableArray alloc] init];
+
     
-    for(int i=0;i<[arrayAllData  count];i++)
+    if([[_xmlDictionaryData objectForKey:@"Lists"] objectForKey:@"List"])
     {
-        if((int)[ModalController calDistancebetWithLatForDis:[locationUser.strUserLat doubleValue] with:[locationUser.strUserLong doubleValue] with:[[[arrayAllData objectAtIndex:i ]objectForKey:@"Lat"]doubleValue] with:[[[arrayAllData objectAtIndex:i ]objectForKey:@"Long"]doubleValue]]<radius)
-        {
-            [arrayNearBy addObject:[arrayAllData objectAtIndex:i]];
-        }
+        if([[[_xmlDictionaryData objectForKey:@"Lists"] objectForKey:@"List"] isKindOfClass:[NSArray class]])
+            arrayNearBy  = [[NSMutableArray alloc] initWithArray:[[_xmlDictionaryData objectForKey:@"Lists"] objectForKey:@"List"]];
         
-         
+        else
+        {
+            arrayNearBy = [[NSMutableArray alloc] init];
+            [arrayNearBy addObject:[[_xmlDictionaryData objectForKey:@"Lists"] objectForKey:@"List"]];
+        }
     }
-    NSLog(@"---------%@",arrayNearBy);
+    
     
     if([arrayNearBy count]==0)
     {
@@ -162,30 +191,17 @@
         tableNearBy.hidden = NO;
         
         tableNearBy.delegate = self;
-        tableNearBy.dataSource = self;
-        
-     //   arrayImageView = [[NSMutableArray alloc] init];
-
-    //    self.urls = [[NSMutableArray alloc]init];
-        
-       // int incX = 10;
-//        for(int i=0;i<[arrayNearBy count];i++)
-//        {
-//            UIImageView *imageSlide = [[UIImageView alloc] initWithFrame:CGRectMake(0, 1, 55, 43)];
-//            incX+= 320;
-//            imageSlide.tag = i;
-//            
-//            [arrayImageView addObject:imageSlide];
-//            [self.urls addObject:[[[[arrayNearBy objectAtIndex:i]objectForKey:FIELDIMAGES]objectForKey:FIELDIMAGE]objectAtIndex:0]];
-//        }
-//        
-        
-//        self.downloads = [[MultipleDownload alloc] initWithUrls: urls];
-//        self.downloads.delegate = self;
-//
-        [tableNearBy    reloadData];
+        tableNearBy.dataSource = self;        
     }
-    
+
+    [tableNearBy    reloadData];
+
+}
+
+
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+    [ModalController showTheAlertWithMsg:@"Error in network" withTitle:@"Failed" inController:self];        
 }
 
 #pragma mark -tableview code-

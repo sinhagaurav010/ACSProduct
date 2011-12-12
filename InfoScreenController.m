@@ -166,9 +166,8 @@
 
 
 
--(IBAction)sendMailButtonClicked:(id)sender{
-	
-	
+-(IBAction)sendMailButtonClicked:(id)sender
+{	
 	MFMailComposeViewController *controller = [MFMailComposeViewController new];
 	[controller setToRecipients:[NSArray arrayWithObjects:@"info@ACS.com",nil]];
 	controller.navigationBar.tintColor = NAVIGATION_BAR_COLOR;

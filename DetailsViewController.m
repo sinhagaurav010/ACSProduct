@@ -104,7 +104,6 @@
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
     // Release any cached data, images, etc that aren't in use.
 }
 -(IBAction)touchForDeal:(id)sender
@@ -114,6 +113,7 @@
     [self.navigationController pushViewController:dealsController animated:YES];
     [dealsController release];
 }
+
 -(void)imageButtonClicked:(id)sender
 {
     SlideShowViewController *myInfoScreenController = [[SlideShowViewController alloc]init];
@@ -252,6 +252,7 @@
         [alerView release];
     }
 }
+
 #pragma mark -
 #pragma mark - UITableView delegates
 

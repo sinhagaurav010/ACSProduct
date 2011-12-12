@@ -15,7 +15,8 @@
 #import "ViewPickerTool.h"
 #import "MultipleDownload.h"
 #import "CustomTableCell.h"
-
+#import "ASIHTTPRequest.h"
+#import "ASIFormDataRequest.h"
 
 @interface NearByViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,cutomDelegateToolPicker> {
     NSMutableArray *arrayDistanceFilter;
