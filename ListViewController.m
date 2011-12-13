@@ -71,11 +71,11 @@
 #pragma mark - View lifecycle
 - (void)viewWillAppear:(BOOL)animated
 {
-if(kmsel == 0 && KMselect != 0)
-{
-    [tableList reloadData];
-    kmsel = 1;
-}
+    if(kmsel == 0 && KMselect != 0)
+    {
+        [tableList reloadData];
+        kmsel = 1;
+    }
     else if(kmsel == 1 && KMselect !=1 )
     {
         [tableList reloadData];
@@ -85,49 +85,49 @@ if(kmsel == 0 && KMselect != 0)
 - (void)viewDidLoad
 {
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:CHANGEMEASUNIT object:nil];
-
+    
     [self.navigationController.navigationBar setTintColor:[UIColor blackColor] ];
-
-//    if(self.isFromHome != 1)
-//    {
-//        self.stringTitle = TITTLELIST;
-//        arrayList = [[NSMutableArray alloc] initWithArray:arrayAllData];
-//    }
-//    
+    
+    //    if(self.isFromHome != 1)
+    //    {
+    //        self.stringTitle = TITTLELIST;
+    //        arrayList = [[NSMutableArray alloc] initWithArray:arrayAllData];
+    //    }
+    //    
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:BASEURL]];
     
     [request setRequestMethod:@"POST"];
     [request setPostValue:locationUser.strUserLat forKey:BASELAT];
     [request setPostValue:locationUser.strUserLong forKey:BASELONG];
-    [request setPostValue:@"12173" forKey:BASEDIS];
+    [request setPostValue:[NSString stringWithFormat:@"%d",radius] forKey:BASEDIS];
     [request setPostValue:@"" forKey:BASEIND];
     [request setPostValue:@"" forKey:BASECAT];
     [request setDelegate:self];
-
+    
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
     hud.labelText = @"Loading...";
     
     [request startAsynchronous];
-
+    
     
     [self.navigationItem setTitle:stringTitle];
     
-//    self.urls = [[NSMutableArray alloc]init];
-//    arrayImages = [[NSMutableArray alloc] init];
-//    for(int i=0;i<[arrayList count];i++)
-//    {
-//        UIImageView *imageViewList = [[UIImageView alloc] initWithFrame:CGRectMake(0,
-//                                                                                   1,
-//                                                                                   55,
-//                                                                                   43)];
-//        [arrayImages addObject:imageViewList];
-//         [self.urls addObject:[[[[arrayList objectAtIndex:i]objectForKey:FIELDIMAGES]objectForKey:FIELDIMAGE]objectAtIndex:0]];
-//    }
-//    
+    //    self.urls = [[NSMutableArray alloc]init];
+    //    arrayImages = [[NSMutableArray alloc] init];
+    //    for(int i=0;i<[arrayList count];i++)
+    //    {
+    //        UIImageView *imageViewList = [[UIImageView alloc] initWithFrame:CGRectMake(0,
+    //                                                                                   1,
+    //                                                                                   55,
+    //                                                                                   43)];
+    //        [arrayImages addObject:imageViewList];
+    //         [self.urls addObject:[[[[arrayList objectAtIndex:i]objectForKey:FIELDIMAGES]objectForKey:FIELDIMAGE]objectAtIndex:0]];
+    //    }
+    //    
     
-//    self.downloads = [[MultipleDownload alloc] initWithUrls: urls];
-//    self.downloads.delegate = self;
+    //    self.downloads = [[MultipleDownload alloc] initWithUrls: urls];
+    //    self.downloads.delegate = self;
     
     
     [super viewDidLoad];
@@ -154,6 +154,12 @@ if(kmsel == 0 && KMselect != 0)
             [arrayList addObject:[[_xmlDictionaryData objectForKey:@"Lists"] objectForKey:@"List"]];
         }
     }
+    else
+    {
+        [ModalController showTheAlertWithMsg:[NSString stringWithFormat:@"No Venue Found Within Radius %d",radius]
+                                   withTitle:@"Info"
+                                inController:self];
+    }
     
     [tableList reloadData];
 }
@@ -162,7 +168,7 @@ if(kmsel == 0 && KMselect != 0)
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
     [ModalController showTheAlertWithMsg:@"Error in network" withTitle:@"Failed" inController:self];        
-        
+    
 }
 
 #pragma mark -
@@ -193,24 +199,24 @@ if(kmsel == 0 && KMselect != 0)
 	 
 	 */
 	
-//	ListCell *cell = (ListCell *)[tableView dequeueReusableCellWithIdentifier:@"ListCell"];
-//	if (!cell) 
-//	{
-//        NSLog(@"heres");
-//        //cell = [[ListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ListCell"];
-//		cell = [[[NSBundle mainBundle] loadNibNamed:@"ListCell" owner:self options:nil] lastObject] ;
-//		cell.backgroundColor=[UIColor whiteColor];
-//		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//        
-//        
-//        cell.costLabel.text = [NSString stringWithFormat:@"$%@",[[arrayList objectAtIndex:indexPath.row] objectForKey:FIELDCOST]];
-//        cell.venueNameLabel.text = [[arrayList objectAtIndex:indexPath.row] objectForKey:FIELDNAME];
-//        cell.dealLabel.text = [[arrayList objectAtIndex:indexPath.row] objectForKey:FIELDDEAL];
-//        cell.distanceLabel.text = [NSString stringWithFormat:@"%.3fKm",[ModalController  calDistancebetWithLat:[locationUser.strUserLat doubleValue] with:[locationUser.strUserLong doubleValue] with:[[[arrayList objectAtIndex:indexPath.row ]objectForKey:@"Lat"]doubleValue] with:[[[arrayList objectAtIndex:indexPath.row ]objectForKey:@"Long"]doubleValue]]];
-////        
-//       cell.imageMain.imageURL = [NSURL URLWithString:[[[[arrayList objectAtIndex:indexPath.row]objectForKey:FIELDIMAGES]objectForKey:FIELDIMAGE]objectAtIndex:0]];
-//	}
-//	
+    //	ListCell *cell = (ListCell *)[tableView dequeueReusableCellWithIdentifier:@"ListCell"];
+    //	if (!cell) 
+    //	{
+    //        NSLog(@"heres");
+    //        //cell = [[ListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ListCell"];
+    //		cell = [[[NSBundle mainBundle] loadNibNamed:@"ListCell" owner:self options:nil] lastObject] ;
+    //		cell.backgroundColor=[UIColor whiteColor];
+    //		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    //        
+    //        
+    //        cell.costLabel.text = [NSString stringWithFormat:@"$%@",[[arrayList objectAtIndex:indexPath.row] objectForKey:FIELDCOST]];
+    //        cell.venueNameLabel.text = [[arrayList objectAtIndex:indexPath.row] objectForKey:FIELDNAME];
+    //        cell.dealLabel.text = [[arrayList objectAtIndex:indexPath.row] objectForKey:FIELDDEAL];
+    //        cell.distanceLabel.text = [NSString stringWithFormat:@"%.3fKm",[ModalController  calDistancebetWithLat:[locationUser.strUserLat doubleValue] with:[locationUser.strUserLong doubleValue] with:[[[arrayList objectAtIndex:indexPath.row ]objectForKey:@"Lat"]doubleValue] with:[[[arrayList objectAtIndex:indexPath.row ]objectForKey:@"Long"]doubleValue]]];
+    ////        
+    //       cell.imageMain.imageURL = [NSURL URLWithString:[[[[arrayList objectAtIndex:indexPath.row]objectForKey:FIELDIMAGES]objectForKey:FIELDIMAGE]objectAtIndex:0]];
+    //	}
+    //	
     
     CustomTableCell *cell = (CustomTableCell *)[tableView dequeueReusableCellWithIdentifier:@"ListCell"];
     
@@ -230,8 +236,8 @@ if(kmsel == 0 && KMselect != 0)
     [cell setDistanceLabelstr:[NSString stringWithFormat:@"%@",[ModalController  calDistancebetWithLat:[locationUser.strUserLat doubleValue] with:[locationUser.strUserLong doubleValue] with:[[[arrayList objectAtIndex:indexPath.row ]objectForKey:@"Lat"]doubleValue] with:[[[arrayList objectAtIndex:indexPath.row ]objectForKey:@"Long"]doubleValue]]]];
     [cell setDealLabelstr:[[arrayList objectAtIndex:indexPath.row] objectForKey:FIELDDEAL]];
     [cell setPhotoFromUrl:[NSString stringWithFormat:IMAGEURL,[[arrayList objectAtIndex:indexPath.row]objectForKey:FIELDIMAGE]]];
-
-   
+    
+    
     //cell.venueImage.image = [(UIImageView*)[arrayImages objectAtIndex:indexPath.row] image];
     return (UITableViewCell *)cell;
 	
@@ -246,22 +252,22 @@ if(kmsel == 0 && KMselect != 0)
                                          animated:YES];
     [detailController release];
     
-//    NSMutableArray *arrayFilter = [[NSMutableArray alloc] init];
-//    
-//    for(int i=0;i<[arrayAllData count];i++)
-//    {
-//        if([[[arrayAllData objectAtIndex:i]objectForKey:FIELDTYPE] isEqualToString:[[commnArray objectAtIndex:indexPath.row]objectForKey:@"name"]] && [[[arrayAllData objectAtIndex:i]objectForKey:FIELDLISTTYPE] isEqualToString:self.strListType] )
-//        {
-//            [arrayFilter addObject:[arrayAllData objectAtIndex:i]];
-//        }
-//    }
-//    
-//    ListViewController *ListController = [[ListViewController alloc] init];
-//    ListController.arrayList = [[NSMutableArray alloc] initWithArray:arrayFilter];
-//    [self.navigationController pushViewController:ListController animated:YES];
-//    [ListController release];
-//    
-//    NSLog(@"%@",arrayFilter);
+    //    NSMutableArray *arrayFilter = [[NSMutableArray alloc] init];
+    //    
+    //    for(int i=0;i<[arrayAllData count];i++)
+    //    {
+    //        if([[[arrayAllData objectAtIndex:i]objectForKey:FIELDTYPE] isEqualToString:[[commnArray objectAtIndex:indexPath.row]objectForKey:@"name"]] && [[[arrayAllData objectAtIndex:i]objectForKey:FIELDLISTTYPE] isEqualToString:self.strListType] )
+    //        {
+    //            [arrayFilter addObject:[arrayAllData objectAtIndex:i]];
+    //        }
+    //    }
+    //    
+    //    ListViewController *ListController = [[ListViewController alloc] init];
+    //    ListController.arrayList = [[NSMutableArray alloc] initWithArray:arrayFilter];
+    //    [self.navigationController pushViewController:ListController animated:YES];
+    //    [ListController release];
+    //    
+    //    NSLog(@"%@",arrayFilter);
 }
 
 

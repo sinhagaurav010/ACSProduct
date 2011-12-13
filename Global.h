@@ -109,7 +109,7 @@ BOOL isSaveToFav;
 #define SYSBARBUTTON(ITEM, SELECTOR) [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:ITEM target:self action:SELECTOR] autorelease]
 BOOL isInternetConnect;
 
-
+NSInteger radius;
 #define MAPTITLE @"Map"
 
 #define MIL @"mil"

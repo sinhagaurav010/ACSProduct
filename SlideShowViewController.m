@@ -111,7 +111,7 @@
         [contentDownloading addObject:dictCont];
         [dictCont release];
         
-        [self.urls addObject:[arrayImagesSlide objectAtIndex:i]];
+        [self.urls addObject:[NSString stringWithFormat:IMAGEURL,[arrayImagesSlide objectAtIndex:i]]];
         
     }
     

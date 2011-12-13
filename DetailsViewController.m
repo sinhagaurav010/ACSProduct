@@ -117,7 +117,7 @@
 -(void)imageButtonClicked:(id)sender
 {
     SlideShowViewController *myInfoScreenController = [[SlideShowViewController alloc]init];
-    myInfoScreenController.arrayImagesSlide = [[dictInfo objectForKey:FIELDIMAGES] objectForKey:FIELDIMAGE];
+    myInfoScreenController.arrayImagesSlide =  [[NSMutableArray alloc] initWithArray:[[NSArray alloc] initWithObjects:[dictInfo objectForKey:FIELDIMAGE], nil]];
 	myInfoScreenController.hidesBottomBarWhenPushed = YES;
 	
 	[UIView beginAnimations:nil context:NULL];

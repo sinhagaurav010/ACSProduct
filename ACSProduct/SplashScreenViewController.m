@@ -37,7 +37,12 @@
 
 - (void)viewDidLoad
 {
+    radius = 50;
+    
     [self.navigationController setNavigationBarHidden:YES];
+    [self.navigationController pushViewController:tabBarController
+                                         animated:YES];
+
     // [self.navigationController pushViewController:tabBarController
     //                   animated:YES];
     

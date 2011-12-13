@@ -69,6 +69,7 @@
 -(void)pressDoneForSel:(NSString *)stringSel withindex:(NSInteger)indexRow
 {
     pickerDis.hidden = YES;
+    radius = [[arrayDistanceFilter objectAtIndex:indexRow ]intValue];
     NSLog(@"----[[arrayDistanceFilter objectAtIndex:indexRow ]intValue]--------%d",[[arrayDistanceFilter objectAtIndex:indexRow ]intValue]);
     [self tableViewSettingWithRad:[[arrayDistanceFilter objectAtIndex:indexRow ]intValue]];
 
@@ -158,6 +159,7 @@
 #define mark -ASIHTTP request delegates-
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
+    
     [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
     NSLog(@"I have got data------->>>>>%@",[request responseString]);
     
