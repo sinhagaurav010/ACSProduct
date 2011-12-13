@@ -31,6 +31,7 @@
 
 - (void)viewDidLoad
 {
+    [self.navigationController.navigationBar setTintColor:[UIColor blackColor]];
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 }

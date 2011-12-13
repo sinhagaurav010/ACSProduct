@@ -105,7 +105,6 @@
 }
 -(void)getdata
 {
-    NSLog(@"ksdvfv%@",modal.stringRx);
     [self parseData:modal.dataXml];
 }
 

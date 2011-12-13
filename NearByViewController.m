@@ -256,7 +256,7 @@
     [cell setCostLabelstr:[NSString stringWithFormat:@"$%@",[[arrayNearBy objectAtIndex:indexPath.row] objectForKey:FIELDCOST]]];
     [cell setDistanceLabelstr:[NSString stringWithFormat:@"%@",[ModalController  calDistancebetWithLat:[locationUser.strUserLat doubleValue] with:[locationUser.strUserLong doubleValue] with:[[[arrayNearBy objectAtIndex:indexPath.row ]objectForKey:@"Lat"]doubleValue] with:[[[arrayNearBy objectAtIndex:indexPath.row ]objectForKey:@"Long"]doubleValue]]]];
     [cell setDealLabelstr:[[arrayNearBy objectAtIndex:indexPath.row] objectForKey:FIELDDEAL]];
-    [cell setPhotoFromUrl:[[[[arrayNearBy objectAtIndex:indexPath.row]objectForKey:FIELDIMAGES]objectForKey:FIELDIMAGE]objectAtIndex:0]];
+    [cell setPhotoFromUrl:[NSString stringWithFormat:IMAGEURL,[[arrayNearBy objectAtIndex:indexPath.row]objectForKey:FIELDIMAGE]]];
     
     //cell.venueImage.image = [(UIImageView*)[arrayImages objectAtIndex:indexPath.row] image];
     return (UITableViewCell *)cell;

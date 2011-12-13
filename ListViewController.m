@@ -229,7 +229,7 @@ if(kmsel == 0 && KMselect != 0)
     
     [cell setDistanceLabelstr:[NSString stringWithFormat:@"%@",[ModalController  calDistancebetWithLat:[locationUser.strUserLat doubleValue] with:[locationUser.strUserLong doubleValue] with:[[[arrayList objectAtIndex:indexPath.row ]objectForKey:@"Lat"]doubleValue] with:[[[arrayList objectAtIndex:indexPath.row ]objectForKey:@"Long"]doubleValue]]]];
     [cell setDealLabelstr:[[arrayList objectAtIndex:indexPath.row] objectForKey:FIELDDEAL]];
-    [cell setPhotoFromUrl:[[[[arrayList objectAtIndex:indexPath.row]objectForKey:FIELDIMAGES]objectForKey:FIELDIMAGE]objectAtIndex:0]];
+    [cell setPhotoFromUrl:[NSString stringWithFormat:IMAGEURL,[[arrayList objectAtIndex:indexPath.row]objectForKey:FIELDIMAGE]]];
 
    
     //cell.venueImage.image = [(UIImageView*)[arrayImages objectAtIndex:indexPath.row] image];

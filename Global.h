@@ -17,10 +17,10 @@ string CatInd = Request.Form["CatInd"].ToString().Trim();
  */
 
 #import "UserLocationFinder.h"
-
+//http://sanganan.com/venueimages/pub2.png
 #define BASEURL @"http://sanganan.com/backofficeservice.aspx"
 
-
+#define IMAGEURL @"http://sanganan.com/%@"
 #define BASELAT @"Latitude"
 #define BASELONG @"Longitude"
 #define BASEDIS @"Distance"
