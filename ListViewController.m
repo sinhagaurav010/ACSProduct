@@ -6,11 +6,17 @@
 //  Copyright 2011 dhillon. All rights reserved.
 //
 
+/*
+ PUB   PUBS NULL 1
+ DISC  DISCO NULL 1
+ MONU  MONUMENT NULL 1
+ ART   ART & CULTURE NULL 1
+ */
 #import "ListViewController.h"
 
 
 @implementation ListViewController
-@synthesize arrayList,stringTitle,isFromHome,downloads,urls;
+@synthesize arrayList,stringTitle,isFromHome,downloads,urls,stringCat;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -96,13 +102,13 @@
     //    
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:BASEURL]];
-    
+    //radius = 20000;
     [request setRequestMethod:@"POST"];
     [request setPostValue:locationUser.strUserLat forKey:BASELAT];
     [request setPostValue:locationUser.strUserLong forKey:BASELONG];
     [request setPostValue:[NSString stringWithFormat:@"%d",radius] forKey:BASEDIS];
-    [request setPostValue:@"" forKey:BASEIND];
-    [request setPostValue:@"" forKey:BASECAT];
+    [request setPostValue:@"1" forKey:BASEIND];
+    [request setPostValue:stringCat forKey:BASECAT];
     [request setDelegate:self];
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
@@ -140,6 +146,7 @@
     [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
     NSLog(@"I have got data------->>>>>%@",[request responseString]);
     
+    
     NSDictionary *_xmlDictionaryData = [[XMLReader dictionaryForXMLData:[request responseData] error:nil] retain];
     NSLog(@"%@",_xmlDictionaryData);
     
@@ -168,7 +175,6 @@
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
     [ModalController showTheAlertWithMsg:@"Error in network" withTitle:@"Failed" inController:self];        
-    
 }
 
 #pragma mark -

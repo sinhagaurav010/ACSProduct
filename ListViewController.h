@@ -27,6 +27,7 @@
 }
 @property(nonatomic,retain)    MultipleDownload   *downloads;
 @property(nonatomic,retain)    NSMutableArray   *urls;
+@property(retain)NSString *stringCat;
 
 @property(retain)NSString *stringTitle;
 @property(assign)BOOL isFromHome;

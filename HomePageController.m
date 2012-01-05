@@ -67,7 +67,7 @@
     
     [self addobjINdictwithStringName:@"Arts and Entertainment" withImageName:@"artsentertainment.png" inArr:1];
     [self addobjINdictwithStringName:@"Clubs and Bar" withImageName:@"bars.jpg" inArr:1];
-    [self addobjINdictwithStringName:@"culture and history" withImageName:@"historyculture.png" inArr:1];
+    [self addobjINdictwithStringName:@"Culture and History" withImageName:@"historyculture.png" inArr:1];
     [self addobjINdictwithStringName:@"Favourites" withImageName:@"favourites.jpg" inArr:1];
     [self addobjINdictwithStringName:@"health&beauty" withImageName:@"healthBeauty.jpg" inArr:1];
     [self addobjINdictwithStringName:@"Hotels" withImageName:@"hotel.gif" inArr:1];
@@ -195,8 +195,8 @@
 }
 
 
-- (void)dealloc {
-	
+- (void)dealloc 
+{	
 	[mySearchBar		release];
 	[mainTableView		release];
 	[categoryImage		release];
@@ -268,6 +268,16 @@
     //ListController.arrayList = [[NSMutableArray alloc] initWithArray:arrayFilter];
     ListController.stringTitle = [[commnArray objectAtIndex:indexPath.row]objectForKey:@"name"];
     ListController.isFromHome = 1;
+    if([[[commnArray objectAtIndex:indexPath.row]objectForKey:@"name"] isEqualToString:@"Clubs and Bar"])
+        ListController.stringCat = @"PUB";
+    else if([[[commnArray objectAtIndex:indexPath.row]objectForKey:@"name"] isEqualToString:@"Hotels"])
+        ListController.stringCat = @"DISC";
+    else if([[[commnArray objectAtIndex:indexPath.row]objectForKey:@"name"] isEqualToString:@"Culture and History"])
+        ListController.stringCat = @"MONU";
+    else if([[[commnArray objectAtIndex:indexPath.row]objectForKey:@"name"] isEqualToString:@"Arts and Entertainment"])
+        ListController.stringCat = @"ART";
+    
+    
     [self.navigationController pushViewController:ListController animated:YES];
     [ListController release];
     
