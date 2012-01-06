@@ -65,27 +65,40 @@
     
     catDataArray = [[NSMutableArray alloc] init];
     
-    [self addobjINdictwithStringName:@"Arts and Entertainment" withImageName:@"artsentertainment.png" inArr:1];
-    [self addobjINdictwithStringName:@"Clubs and Bar" withImageName:@"bars.jpg" inArr:1];
-    [self addobjINdictwithStringName:@"Culture and History" withImageName:@"historyculture.png" inArr:1];
-    [self addobjINdictwithStringName:@"Favourites" withImageName:@"favourites.jpg" inArr:1];
-    [self addobjINdictwithStringName:@"health&beauty" withImageName:@"healthBeauty.jpg" inArr:1];
-    [self addobjINdictwithStringName:@"Hotels" withImageName:@"hotel.gif" inArr:1];
-    [self addobjINdictwithStringName:@"Museum" withImageName:@"museum.gif" inArr:1];
-    [self addobjINdictwithStringName:@"Neighborhoods" withImageName:@"neighborhoods.gif" inArr:1];
-    [self addobjINdictwithStringName:@"Parks" withImageName:@"park.jpg" inArr:1];
-    [self addobjINdictwithStringName:@"Religion" withImageName:@"religion.png" inArr:1];
-    [self addobjINdictwithStringName:@"Restaurants" withImageName:@"restaurants.gif" inArr:1];
-    [self addobjINdictwithStringName:@"Shopping" withImageName:@"shopping.png" inArr:1];
-    [self addobjINdictwithStringName:@"Tour" withImageName:@"tour.gif" inArr:1];
+//    [self addobjINdictwithStringName:@"Arts and Entertainment" withImageName:@"artsentertainment.png" inArr:1];
+//    [self addobjINdictwithStringName:@"Clubs and Bar" withImageName:@"bars.jpg" inArr:1];
+//    [self addobjINdictwithStringName:@"Culture and History" withImageName:@"historyculture.png" inArr:1];
+//    [self addobjINdictwithStringName:@"Favourites" withImageName:@"favourites.jpg" inArr:1];
+//    [self addobjINdictwithStringName:@"health&beauty" withImageName:@"healthBeauty.jpg" inArr:1];
+//    [self addobjINdictwithStringName:@"Hotels" withImageName:@"hotel.gif" inArr:1];
+//    [self addobjINdictwithStringName:@"Museum" withImageName:@"museum.gif" inArr:1];
+//    [self addobjINdictwithStringName:@"Neighborhoods" withImageName:@"neighborhoods.gif" inArr:1];
+//    [self addobjINdictwithStringName:@"Parks" withImageName:@"park.jpg" inArr:1];
+//    [self addobjINdictwithStringName:@"Religion" withImageName:@"religion.png" inArr:1];
+//    [self addobjINdictwithStringName:@"Restaurants" withImageName:@"restaurants.gif" inArr:1];
+//    [self addobjINdictwithStringName:@"Shopping" withImageName:@"shopping.png" inArr:1];
+//    [self addobjINdictwithStringName:@"Tour" withImageName:@"tour.gif" inArr:1];
     
     tagDataArray = [[NSMutableArray alloc] init];
     
-    [self addobjINdictwithStringName:@"Business" withImageName:@"business.jpg" inArr:0];
-    [self addobjINdictwithStringName:@"Classic" withImageName:@"classic.jpg" inArr:0];
-    [self addobjINdictwithStringName:@"Mansion" withImageName:@"mansion.png" inArr:0];
-    [self addobjINdictwithStringName:@"Outdoor" withImageName:@"outdoor.png" inArr:0];
-    [self addobjINdictwithStringName:@"Romantic" withImageName:@"romantic.jpg" inArr:0];
+    NSString *filePath	= [[NSBundle mainBundle]pathForResource:@"ListCat" ofType:@"xml"];
+	NSString *fileContents= [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+    
+     NSDictionary *_xmlDictionaryData = [XMLReader dictionaryForXMLData:[fileContents dataUsingEncoding:NSUTF8StringEncoding] error:nil] ;
+    NSLog(@"%@",_xmlDictionaryData);
+    
+    for(int i=0;i<[[[_xmlDictionaryData objectForKey:@"categories"]objectForKey:@"catagory"] count];i++)
+    {
+    if([[[[[_xmlDictionaryData objectForKey:@"categories"]objectForKey:@"catagory"] objectAtIndex:i] objectForKey:@"CatInd"] isEqualToString:@"1"])
+        [catDataArray addObject:[[[_xmlDictionaryData objectForKey:@"categories"]objectForKey:@"catagory"] objectAtIndex:i] ];
+        else
+            [tagDataArray addObject:[[[_xmlDictionaryData objectForKey:@"categories"]objectForKey:@"catagory"] objectAtIndex:i] ];
+    }
+//    [self addobjINdictwithStringName:@"Business" withImageName:@"business.jpg" inArr:0];
+//    [self addobjINdictwithStringName:@"Classic" withImageName:@"classic.jpg" inArr:0];
+//    [self addobjINdictwithStringName:@"Mansion" withImageName:@"mansion.png" inArr:0];
+//    [self addobjINdictwithStringName:@"Outdoor" withImageName:@"outdoor.png" inArr:0];
+//    [self addobjINdictwithStringName:@"Romantic" withImageName:@"romantic.jpg" inArr:0];
     
 	commnArray = [catDataArray retain];
 	///////////////////////////////////////////////////////////////////////////////////////////
@@ -244,8 +257,8 @@
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	}
 	
-	cell.nameLabel.text = [NSString stringWithFormat:@"%@", [[[commnArray objectAtIndex:indexPath.row] objectForKey:@"name" ] stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]]];
-	cell.catImage.image = [UIImage imageNamed: [[commnArray objectAtIndex:indexPath.row] objectForKey:IMAGEDATAACS]];
+	cell.nameLabel.text = [NSString stringWithFormat:@"%@", [[[commnArray objectAtIndex:indexPath.row] objectForKey:@"Name" ] stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]]];
+	cell.catImage.image = [UIImage imageNamed: [[commnArray objectAtIndex:indexPath.row] objectForKey:@"Image"]];
     
     
 	return (UITableViewCell *)cell;
@@ -254,34 +267,34 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
 {
-    NSMutableArray *arrayFilter = [[NSMutableArray alloc] init];
-    
-    for(int i=0;i<[arrayAllData count];i++)
-    {
-        if([[[arrayAllData objectAtIndex:i]objectForKey:FIELDTYPE] isEqualToString:[[commnArray objectAtIndex:indexPath.row]objectForKey:@"name"]] && [[[arrayAllData objectAtIndex:i]objectForKey:FIELDLISTTYPE] isEqualToString:self.strListType] )
-        {
-            [arrayFilter addObject:[arrayAllData objectAtIndex:i]];
-        }
-    }
+//    NSMutableArray *arrayFilter = [[NSMutableArray alloc] init];
+//    
+//    for(int i=0;i<[arrayAllData count];i++)
+//    {
+//        if([[[arrayAllData objectAtIndex:i]objectForKey:FIELDTYPE] isEqualToString:[[commnArray objectAtIndex:indexPath.row]objectForKey:@"name"]] && [[[arrayAllData objectAtIndex:i]objectForKey:FIELDLISTTYPE] isEqualToString:self.strListType] )
+//        {
+//            [arrayFilter addObject:[arrayAllData objectAtIndex:i]];
+//        }
+//    }
     
     ListViewController *ListController = [[ListViewController alloc] init];
     //ListController.arrayList = [[NSMutableArray alloc] initWithArray:arrayFilter];
-    ListController.stringTitle = [[commnArray objectAtIndex:indexPath.row]objectForKey:@"name"];
+    ListController.stringTitle = [[commnArray objectAtIndex:indexPath.row]objectForKey:@"Name"];
     ListController.isFromHome = 1;
-    if([[[commnArray objectAtIndex:indexPath.row]objectForKey:@"name"] isEqualToString:@"Clubs and Bar"])
-        ListController.stringCat = @"PUB";
-    else if([[[commnArray objectAtIndex:indexPath.row]objectForKey:@"name"] isEqualToString:@"Hotels"])
-        ListController.stringCat = @"DISC";
-    else if([[[commnArray objectAtIndex:indexPath.row]objectForKey:@"name"] isEqualToString:@"Culture and History"])
-        ListController.stringCat = @"MONU";
-    else if([[[commnArray objectAtIndex:indexPath.row]objectForKey:@"name"] isEqualToString:@"Arts and Entertainment"])
-        ListController.stringCat = @"ART";
-    
-    
+//    if([[[commnArray objectAtIndex:indexPath.row]objectForKey:@"name"] isEqualToString:@"Clubs and Bar"])
+//        ListController.stringCat = @"PUB";
+//    else if([[[commnArray objectAtIndex:indexPath.row]objectForKey:@"name"] isEqualToString:@"Hotels"])
+//        ListController.stringCat = @"DISC";
+//    else if([[[commnArray objectAtIndex:indexPath.row]objectForKey:@"name"] isEqualToString:@"Culture and History"])
+//        ListController.stringCat = @"MONU";
+//    else if([[[commnArray objectAtIndex:indexPath.row]objectForKey:@"name"] isEqualToString:@"Arts and Entertainment"])
+//        ListController.stringCat = @"ART";
+    ListController.stringCat = [[commnArray objectAtIndex:indexPath.row] objectForKey:@"Id" ];
+    ListController.stringCatInd = [[commnArray objectAtIndex:indexPath.row] objectForKey:@"CatInd"];
     [self.navigationController pushViewController:ListController animated:YES];
     [ListController release];
     
-    NSLog(@"%@",arrayFilter);
+//    NSLog(@"%@",arrayFilter);
 }
 
 

@@ -181,6 +181,7 @@
 		5DD3C50614940621007835B1 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DD3C50514940621007835B1 /* libz.dylib */; };
 		5DD3C51014940925007835B1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DD3C50F14940925007835B1 /* MobileCoreServices.framework */; };
 		5DD3C51214940939007835B1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DD3C51114940939007835B1 /* SystemConfiguration.framework */; };
+		5DEB6F3114B78522006C8089 /* ListCat.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5DEB6F3014B78522006C8089 /* ListCat.xml */; };
 		5DF83BCB14479B0000D02990 /* MultipleDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DF83BCA14479B0000D02990 /* MultipleDownload.m */; };
 /* End PBXBuildFile section */
 
@@ -446,6 +447,7 @@
 		5DD3C50514940621007835B1 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		5DD3C50F14940925007835B1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		5DD3C51114940939007835B1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		5DEB6F3014B78522006C8089 /* ListCat.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ListCat.xml; sourceTree = "<group>"; };
 		5DF83BC914479B0000D02990 /* MultipleDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultipleDownload.h; sourceTree = "<group>"; };
 		5DF83BCA14479B0000D02990 /* MultipleDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultipleDownload.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -601,6 +603,7 @@
 		5D208126143E287F00D6B481 = {
 			isa = PBXGroup;
 			children = (
+				5DEB6F3314B7852A006C8089 /* TextFile */,
 				5D56F9F114969FF000B9D56F /* SettingViewController */,
 				5D56F9F21496A00600B9D56F /* FrameworkExtra */,
 				5DD3C4FD149405BB007835B1 /* ASIHTTP */,
@@ -1045,6 +1048,14 @@
 			name = ASIHTTP;
 			sourceTree = "<group>";
 		};
+		5DEB6F3314B7852A006C8089 /* TextFile */ = {
+			isa = PBXGroup;
+			children = (
+				5DEB6F3014B78522006C8089 /* ListCat.xml */,
+			);
+			name = TextFile;
+			sourceTree = "<group>";
+		};
 		5DF83BD114479B1000D02990 /* MultipleDownload */ = {
 			isa = PBXGroup;
 			children = (
@@ -1194,6 +1205,7 @@
 				1CB2AF951473A985000C8539 /* ACSData.xml in Resources */,
 				1CB2AF9D1473B5E9000C8539 /* placeholder.jpg in Resources */,
 				5D56F9EF14969FDF00B9D56F /* SettingViewController.xib in Resources */,
+				5DEB6F3114B78522006C8089 /* ListCat.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

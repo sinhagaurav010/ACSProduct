@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<categories>
+    <catagory>    
+        <Name>Arts and Entertainment</Name>    
+        <Image>artsentertainment.png</Image>
+        <Id>ART</Id>
+        <CatInd>1</CatInd>
+    </catagory>
+    <catagory>    
+        <Name>Clubs and Bar</Name>    
+        <Image>bars.jpg</Image>
+        <Id>PUB</Id>
+        <CatInd>1</CatInd>
+    </catagory>
+    <catagory>    
+        <Name>Culture and History</Name>    
+        <Image>historyculture.png</Image>
+        <Id>MONU</Id>
+        <CatInd>1</CatInd>
+    </catagory>
+    <catagory>    
+        <Name>Favourites</Name>    
+        <Image>favourites.jpg</Image>
+        <Id>FAV</Id>
+        <CatInd>1</CatInd>
+    </catagory>
+    <catagory>    
+        <Name>Health And Beauty</Name>    
+        <Image>healthBeauty.jpg</Image>
+        <Id>HEAL</Id>
+        <CatInd>1</CatInd>
+    </catagory>
+    <catagory>    
+        <Name>Museum</Name>    
+        <Image>museum.gif</Image>
+        <Id>MEUS</Id>
+        <CatInd>1</CatInd>
+    </catagory>
+    <catagory>    
+        <Name>Hotels</Name>    
+        <Image>hotel.gif</Image>
+        <Id>DISC</Id>
+        <CatInd>1</CatInd>
+    </catagory>
+    <catagory>    
+        <Name>Neighborhoods</Name>    
+        <Image>neighborhoods.gif</Image>
+        <Id>NEIGH</Id>
+        <CatInd>1</CatInd>
+    </catagory>
+    <catagory>    
+        <Name>Parks</Name>    
+        <Image>park.jpg</Image>
+        <Id>PARK</Id>
+        <CatInd>1</CatInd>
+    </catagory>
+    <catagory>    
+        <Name>Business</Name>    
+        <Image>business.jpg</Image>
+        <Id>BUSI</Id>
+        <CatInd>0</CatInd>
+    </catagory>
+    <catagory>    
+        <Name>Classic</Name>    
+        <Image>classic.jpg</Image>
+        <Id>CLASS</Id>
+        <CatInd>0</CatInd>
+    </catagory><catagory>    
+        <Name>Mansion</Name>    
+        <Image>mansion.png</Image>
+        <Id>MANS</Id>
+        <CatInd>0</CatInd>
+    </catagory>
+    <catagory>    
+        <Name>Outdoor</Name>    
+        <Image>outdoor.png</Image>
+        <Id>OUTD</Id>
+        <CatInd>0</CatInd>
+    </catagory>
+    
+    
+</categories>

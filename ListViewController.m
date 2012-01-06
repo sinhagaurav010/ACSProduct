@@ -16,7 +16,7 @@
 
 
 @implementation ListViewController
-@synthesize arrayList,stringTitle,isFromHome,downloads,urls,stringCat;
+@synthesize arrayList,stringTitle,stringCatInd,isFromHome,downloads,urls,stringCat;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -107,7 +107,7 @@
     [request setPostValue:locationUser.strUserLat forKey:BASELAT];
     [request setPostValue:locationUser.strUserLong forKey:BASELONG];
     [request setPostValue:[NSString stringWithFormat:@"%d",radius] forKey:BASEDIS];
-    [request setPostValue:@"1" forKey:BASEIND];
+    [request setPostValue:stringCatInd forKey:BASEIND];
     [request setPostValue:stringCat forKey:BASECAT];
     [request setDelegate:self];
     

@@ -10,6 +10,7 @@
 #import "Global.h"
 //#import "DatabaseHandler.h"
 #import "ListViewController.h"
+#import "XMLReader.h"
 @class ListViewController;
 @interface HomePageController : UIViewController {
 	
